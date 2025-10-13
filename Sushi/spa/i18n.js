@@ -3,6 +3,9 @@
 // ========================================
 const translations = {
   "zh-TW": {
+    //Page title
+    "page.title": "壽司助手 🍣 - 壽司部門幫廚",
+
     // Navigation
     "nav.checklist": "流程",
     "nav.roll2": "卷2",
@@ -196,6 +199,8 @@ const translations = {
   },
 
   "zh-CN": {
+    //Page title
+    "page.title": "寿司助手 🍣 - 寿司部门帮厨",
     // Navigation
     "nav.checklist": "流程",
     "nav.roll2": "卷2",
@@ -389,6 +394,9 @@ const translations = {
   },
 
   "en": {
+    //Page title
+    "page.title": "Sushi Assistant 🍣 - Kitchen Helper in Sushi Department",
+
     // Navigation
     "nav.checklist": "Workflow",
     "nav.roll2": "Roll 2",
