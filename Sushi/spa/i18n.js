@@ -107,6 +107,7 @@ const translations = {
     "product.mapleLeafRoll": "楓葉卷",
     "product.spicyTunaRoll": "辣吞拿魚卷",
     "product.bigRoll": "太卷",
+    "product.batch": "批次",
 
     // Ingredient Components
     "ing.type2Inside": "(2號反卷)",
@@ -299,6 +300,7 @@ const translations = {
     "product.mapleLeafRoll": "枫叶卷",
     "product.spicyTunaRoll": "辣吞拿鱼卷",
     "product.bigRoll": "太卷",
+    "product.batch": "批次",
 
     // Ingredient Components (Simplified Chinese)
     "ing.type2Inside": "(2号反卷)",
@@ -491,6 +493,7 @@ const translations = {
     "product.bigRoll": "Big Roll",
     "product.largeShrimp": "Large Shrimp",
     "product.cucumber": "Cucumber",
+    "product.batch": "Batch",
 
     // Ingredient Components (English)
     "ing.type2Inside": "(Type 2 Inside-Out)",
