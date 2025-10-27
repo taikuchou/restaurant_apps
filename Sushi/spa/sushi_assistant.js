@@ -144,7 +144,7 @@
     },
     "crispyDragon": {
       type: "ing.type2Inside",
-      fillings: ["ing.cucumber 10g", "ing.crabmeat 10g", "ing.shrimpPair"]
+      fillings: ["ing.cucumber 10g", "ing.crabstick 2", "ing.shrimpPair"]
     },
     "miniShrimp": {
       type: "ing.type2Inside",
@@ -154,7 +154,7 @@
     "largeTempuraShrimp": {
       type: "ing.type3Inside",
       toppings: ["ing.whiteSesame"],
-      fillings: ["ing.lettuce 2", "ing.cucumber 25g", "ing.carrotJulienne 15g", "ing.shrimpPair", "ing.crabmeat"]
+      fillings: ["ing.lettuce 2", "ing.cucumber 25g", "ing.carrotJulienne 15g", "ing.shrimpPair", "ing.crabstick 2"]
     },
     "gardenDelight": {
       type: "ing.multiType",
@@ -176,7 +176,7 @@
     },
     "futomaki": {
       type: "ing.type3Outside",
-      fillings: ["ing.crabmeat", "ing.cucumber", "ing.egg", "ing.pickledRadish", "ing.redTobiko"]
+      fillings: ["ing.crabstick 2", "ing.cucumber 25g", "ing.egg 30g", "ing.pickledRadish 2", "ing.yellowPickle 30g", "ing.redTobiko"]
     },
     "egg": {
       type: "ing.type1Normal",
@@ -601,8 +601,8 @@
 
   // Initial items definition with translation keys
   const initialItemsData = [
-    { nameKey: "whiteCalifornia", target: 9, noteKey: "ing.noTobiko 5, ing.orangeTobiko 4", ingKey: "whiteCalifornia" },
-    { nameKey: "california", target: 20, noteKey: "ing.greenGrass 4, ing.orangeTobiko 16", ingKey: "california" },
+    { nameKey: "whiteCalifornia", target: 9, noteKey: "ing.noTobiko 3, ing.orangeTobiko 6", ingKey: "whiteCalifornia" },
+    { nameKey: "california", target: 20, noteKey: "ing.orangeTobiko 20", ingKey: "california" },
     { nameKey: "miniSalmon", target: 12, note: "", ingKey: "miniSalmon" },
     { nameKey: "california", target: 10, note: "", ingKey: "california" },
     { nameKey: "seafood", target: 5, note: "", ingKey: "seafood" },
@@ -923,24 +923,24 @@
     { nameKey: "seafood", styleKey: "ing.type2Inside", toppingsKeys: ["ing.whiteSesame", "ing.orangeTobiko"], fillingsKeys: ["ing.cucumber 10g", "ing.crabmeat 20g", "ing.salmon 15g", "ing.tamagoyaki 10g"] },
     { nameKey: "avocado", styleKey: "ing.type2Inside", toppingsKeys: ["ing.whiteSesame", "ing.seaweed"], fillingsKeys: ["ing.avocado 60g"] },
     { nameKey: "cucumberAvocado", styleKey: "ing.type2Inside", toppingsKeys: ["ing.whiteSesame", "ing.seaweed"], fillingsKeys: ["ing.avocado 30g", "ing.cucumber 30g"] },
-    { nameKey: "spiderRoll", styleKey: "ing.type2Inside", toppingsKeys: [], fillingsKeys: ["ing.cucumber 10g", "ing.crabmeat 10g", "ing.onePairShrimp"] },
+    { nameKey: "spiderRoll", styleKey: "ing.type2Inside", toppingsKeys: [], fillingsKeys: ["ing.cucumber 15g", "ing.crabstick 2", "ing.onePairShrimp"] },
     { nameKey: "miniShrimp", styleKey: "ing.type2Inside", toppingsKeys: ["ing.whiteSesame"], fillingsKeys: ["ing.cucumber 20g", "ing.onePairShrimp"] },
     { nameKey: "largeTempuraShrimp", styleKey: "ing.type3Inside", toppingsKeys: ["ing.whiteSesame"], fillingsKeys: ["ing.lettuce 2pcs", "ing.cucumber 25g", "ing.carrotShred 15g", "ing.onePairShrimp", "ing.crabmeat"] },
     {
       nameKey: "gardenDelight",
       styleKey: "note.multipleTypes",
       variants: [
-        { titleKey: "note.gardenDelight1", toppingsKeys: ["ing.blackWhiteSesame"], fillingsKeys: ["ing.pickledRadish 30g", "ing.redPepperShred 25g"] },
-        { titleKey: "note.gardenDelight2", toppingsKeys: ["ing.blackWhiteSesame"], fillingsKeys: ["ing.cucumber 20g", "ing.avocado 25g"] },
-        { titleKey: "note.gardenDelight3", toppingsKeys: ["ing.blackWhiteSesame"], fillingsKeys: ["ing.cucumber 20g", "ing.redPepperShred 10g", "ing.carrotShred 20g"] },
-        { titleKey: "note.gardenDelight4", toppingsKeys: [], fillingsKeys: ["ing.lettuce 2pcs", "ing.cucumber 30g", "ing.avocado 20g", "ing.pickledRadish 30g", "ing.redPepperShred 20g", "ing.carrotShred 15g"] }
+        { titleKey: "note.gardenDelight1", styleKey: "ing.type1Inside", toppingsKeys: ["ing.blackWhiteSesame"], fillingsKeys: ["ing.pickledRadish 30g", "ing.redPepperShred 25g"] },
+        { titleKey: "note.gardenDelight2", styleKey: "ing.type1Inside", toppingsKeys: ["ing.blackWhiteSesame"], fillingsKeys: ["ing.cucumber 20g", "ing.avocado 25g"] },
+        { titleKey: "note.gardenDelight3", styleKey: "ing.type2Inside", toppingsKeys: ["ing.blackWhiteSesame"], fillingsKeys: ["ing.cucumber 20g", "ing.redPepperShred 10g", "ing.carrotShred 20g"] },
+        { titleKey: "note.gardenDelight4", styleKey: "ing.type3Normal", toppingsKeys: [], fillingsKeys: ["ing.lettuce 2pcs", "ing.cucumber 30g", "ing.avocado 20g", "ing.pickledRadish 30g", "ing.redPepperShred 20g", "ing.carrotShred 15g"] }
       ]
     },
     { nameKey: "miniSalmon", styleKey: "ing.type1Normal", toppingsKeys: [], fillingsKeys: ["ing.salmon 30g"] },
     { nameKey: "miniCucumber", styleKey: "ing.type1Normal", toppingsKeys: [], fillingsKeys: ["ing.cucumber 30g"] },
     { nameKey: "mapleLeafRoll", styleKey: "ing.type3Inside", toppingsKeys: ["ing.whiteSesame", "ing.orangeTobiko"], fillingsKeys: ["note.mapleLeafFilling"] },
     { nameKey: "cookedSalmon", styleKey: "ing.type2Inside", toppingsKeys: ["ing.whiteSesame"], fillingsKeys: ["ing.cookedSalmon", "ing.cucumber"], notesKey: "note.cookedSalmonNote" },
-    { nameKey: "bigRoll", styleKey: "ing.type3Normal", toppingsKeys: [], fillingsKeys: ["ing.crabmeat", "ing.cucumber", "ing.egg", "ing.pickledBamboo", "ing.redTobiko"] },
+    { nameKey: "bigRoll", styleKey: "ing.type3Normal", toppingsKeys: [], fillingsKeys: ["ing.crabstick 2", "ing.cucumber 25g", "ing.egg 30g", "ing.pickledRadish 2", "ing.redTobiko"] },
     { nameKey: "spicyTunaRoll", styleKey: "ing.type2Inside", toppingsKeys: ["ing.whiteSesame"], fillingsKeys: ["ing.tunaSashimi", "ing.cucumber"] }
   ];
 
@@ -976,9 +976,49 @@
 
   const picker = document.getElementById("notes-picker");
   const result = document.getElementById("notes-result");
+  const searchInput = document.getElementById("notes-search-input");
+  const searchBtn = document.getElementById("notes-search-btn");
+  const clearBtn = document.getElementById("notes-clear-btn");
+
+  // Mode toggle elements
+  const modeToggleBtn = document.getElementById("notes-mode-toggle");
+  const modeIcon = document.getElementById("notes-mode-icon");
+  const modeText = document.getElementById("notes-mode-text");
+  const currentModeText = document.getElementById("notes-current-mode");
+  const selectModeUI = document.getElementById("notes-select-mode");
+  const searchModeUI = document.getElementById("notes-search-mode");
+
+  let currentMode = "select"; // "select" or "search"
+
+  // Toggle between select and search modes
+  function toggleMode() {
+    if (currentMode === "select") {
+      // Switch to search mode
+      currentMode = "search";
+      selectModeUI.style.display = "none";
+      searchModeUI.style.display = "flex";
+      modeIcon.textContent = "📋";
+      modeText.textContent = i18n.t('notes.switchToSelect');
+      currentModeText.textContent = i18n.t('notes.modeSearch');
+      result.innerHTML = `<div class="empty">${i18n.t('notes.emptySearch')}</div>`;
+      // Clear select picker
+      picker.value = "";
+    } else {
+      // Switch to select mode
+      currentMode = "select";
+      selectModeUI.style.display = "flex";
+      searchModeUI.style.display = "none";
+      modeIcon.textContent = "🔍";
+      modeText.textContent = i18n.t('notes.switchToSearch');
+      currentModeText.textContent = i18n.t('notes.modeSelect');
+      result.innerHTML = `<div class="empty">${i18n.t('notes.empty')}</div>`;
+      // Clear search input
+      searchInput.value = "";
+    }
+  }
 
   function renderList(arr) {
-    if (!arr || !arr.length) return '<div class="meta">（未註明）</div>';
+    if (!arr || !arr.length) return `<div class="meta">${i18n.t('notes.none')}</div>`;
     return `<ul>${arr.map(x => `<li>${x}</li>`).join("")}</ul>`;
   }
 
@@ -988,30 +1028,144 @@
       return;
     }
     if (!item.variants) {
+      const hasToppings = item.toppings && item.toppings.length > 0;
       result.innerHTML = `
         <div class="note-card">
-          <div class="title">${item.name}&nbsp;&nbsp;<span class="tag">${item.style || "卷型號未註明"}</span></div>
+          <div class="title">${item.name}&nbsp;&nbsp;</div>
           <div class="grid">
-            <div class="sec">${renderList(item.fillings)}</div>
+            <div class="sec">
+             <span class="tag">${item.style || i18n.t('notes.styleUnknown')}</span>&nbsp;&nbsp;
+              ${hasToppings ? `
+             <span class="tag">${(item.toppings)}</span>
+            ` : ''}
+              ${renderList(item.fillings)}
+            </div>
           </div>
+          ${item.notes ? `<div class="meta" style="margin-top:10px;padding-top:10px;border-top:1px dashed var(--border);"><strong>備註：</strong>${item.notes}</div>` : ''}
         </div>`;
     } else {
       result.innerHTML = `
         <div class="note-card">
           <div class="title">${item.name}</div>
-          ${item.variants.map(v => `
+          ${item.variants.map(v => {
+        const hasToppings = v.toppings && v.toppings.length > 0;
+        return `
             <div class="sec" style="border-top:1px dashed var(--border);padding-top:10px;margin-top:10px;">
               <div class="meta"><strong>${v.title}</strong></div>
               <div class="grid">
-                <div>${renderList(v.fillings)}</div>
+                <div class="sec">
+                    ${hasToppings ? `
+                  <span class="tag">${(v.toppings)}</span>
+                  ` : ''}
+                    ${renderList(v.fillings)}
+                </div>
               </div>
-            </div>`).join("")}
+            </div>`;
+      }).join("")}
         </div>`;
     }
   }
 
+  // Search function - filters DATA based on search term
+  function searchSushi(searchTerm) {
+    if (!searchTerm || searchTerm.trim() === "") {
+      return [];
+    }
+
+    const term = searchTerm.toLowerCase().trim();
+    return DATA.filter(item => {
+      // Search in name
+      if (item.name.toLowerCase().includes(term)) return true;
+
+      // Search in style
+      if (item.style && item.style.toLowerCase().includes(term)) return true;
+
+      // Search in toppings
+      if (item.toppings && item.toppings.some(t => t.toLowerCase().includes(term))) return true;
+
+      // Search in fillings
+      if (item.fillings && item.fillings.some(f => f.toLowerCase().includes(term))) return true;
+
+      // Search in notes
+      if (item.notes && item.notes.toLowerCase().includes(term)) return true;
+
+      // Search in variants
+      if (item.variants) {
+        return item.variants.some(v => {
+          if (v.title && v.title.toLowerCase().includes(term)) return true;
+          if (v.toppings && v.toppings.some(t => t.toLowerCase().includes(term))) return true;
+          if (v.fillings && v.fillings.some(f => f.toLowerCase().includes(term))) return true;
+          return false;
+        });
+      }
+
+      return false;
+    });
+  }
+
+  // Render multiple items
+  function renderMultipleItems(items) {
+    if (!items || items.length === 0) {
+      result.innerHTML = `<div class="empty">${i18n.t('notes.noResults')}</div>`;
+      return;
+    }
+
+    const header = `<div class="meta" style="margin-bottom:15px;"><strong>${i18n.t('notes.searchResults')}</strong>: ${items.length} ${i18n.t('notes.selectSushi')}</div>`;
+
+    const cardsHtml = items.map(item => {
+      if (!item.variants) {
+        const hasToppings = item.toppings && item.toppings.length > 0;
+        return `
+          <div class="note-card" style="margin-bottom:20px;">
+            <div class="title">${item.name}&nbsp;&nbsp;</div>
+            <div class="grid">
+              <div class="sec">
+               <span class="tag">${item.style || i18n.t('notes.styleUnknown')}</span>&nbsp;&nbsp;
+                ${hasToppings ? `
+               <span class="tag">${(item.toppings)}</span>
+              ` : ''}
+                ${renderList(item.fillings)}
+              </div>
+            </div>
+            ${item.notes ? `<div class="meta" style="margin-top:10px;padding-top:10px;border-top:1px dashed var(--border);"><strong>備註：</strong>${item.notes}</div>` : ''}
+          </div>`;
+      } else {
+        return `
+          <div class="note-card" style="margin-bottom:20px;">
+            <div class="title">${item.name}</div>
+            ${item.variants.map(v => {
+          const hasToppings = v.toppings && v.toppings.length > 0;
+          return `
+              <div class="sec" style="border-top:1px dashed var(--border);padding-top:10px;margin-top:10px;">
+                <div class="meta"><strong>${v.title}</strong></div>
+                <div class="sec">
+                  <span class="tag">${v.style || i18n.t('notes.styleUnknown')}</span>&nbsp;&nbsp;
+                    ${hasToppings ? `
+                  <span class="tag">${(v.toppings)}</span>
+                  ` : ''}
+                    ${renderList(v.fillings)}
+                </div>
+              </div>`;
+        }).join("")}
+          </div>`;
+      }
+    }).join("");
+
+    result.innerHTML = header + cardsHtml;
+  }
+
   function buildPicker() {
     picker.innerHTML = "";
+
+    // Add placeholder option
+    const placeholder = document.createElement("option");
+    placeholder.value = "";
+    placeholder.textContent = i18n.t('notes.placeholder');
+    placeholder.disabled = true;
+    placeholder.selected = true;
+    picker.appendChild(placeholder);
+
+    // Add sushi roll options
     DATA.forEach((item, idx) => {
       const opt = document.createElement("option");
       opt.value = idx;
@@ -1021,16 +1175,62 @@
   }
 
   buildPicker();
-  document.getElementById("notes-view-btn").addEventListener("click", () => {
+
+  // Mode toggle button handler
+  modeToggleBtn.addEventListener("click", () => {
+    toggleMode();
+  });
+
+  // Select mode: picker change handler
+  picker.addEventListener("change", () => {
+    if (picker.value === "") {
+      result.innerHTML = `<div class="empty">${i18n.t('notes.empty')}</div>`;
+      return;
+    }
     const idx = parseInt(picker.value, 10);
     renderItem(DATA[idx]);
   });
+
+  // Search mode: search button click handler
+  searchBtn.addEventListener("click", () => {
+    const searchTerm = searchInput.value;
+    const results = searchSushi(searchTerm);
+    renderMultipleItems(results);
+  });
+
+  // Search mode: clear button click handler
+  clearBtn.addEventListener("click", () => {
+    searchInput.value = "";
+    result.innerHTML = `<div class="empty">${i18n.t('notes.emptySearch')}</div>`;
+  });
+
+  // Search mode: enter key in search input
+  searchInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      searchBtn.click();
+    }
+  });
+
+  // Show empty message by default (select mode)
+  result.innerHTML = `<div class="empty">${i18n.t('notes.empty')}</div>`;
 
   // Expose rebuild function for i18n language changes
   window.notesRebuild = function () {
     DATA = buildData();
     buildPicker();
-    result.innerHTML = `<div class="empty">${i18n.t('notes.empty')}</div>`;
+    searchInput.placeholder = i18n.t('notes.searchPlaceholder');
+
+    // Update mode toggle button text based on current mode
+    if (currentMode === "select") {
+      modeText.textContent = i18n.t('notes.switchToSearch');
+      currentModeText.textContent = i18n.t('notes.modeSelect');
+      result.innerHTML = `<div class="empty">${i18n.t('notes.empty')}</div>`;
+    } else {
+      modeText.textContent = i18n.t('notes.switchToSelect');
+      currentModeText.textContent = i18n.t('notes.modeSearch');
+      result.innerHTML = `<div class="empty">${i18n.t('notes.emptySearch')}</div>`;
+    }
   };
 })();
 
