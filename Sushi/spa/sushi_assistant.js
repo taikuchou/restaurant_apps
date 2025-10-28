@@ -181,7 +181,11 @@
     "egg": {
       type: "ing.type1Normal",
       fillings: ["ing.tamago"]
-    }
+    },
+    "tunaSashimi": {
+      type: "ing.type2Inside",
+      fillings: ["ing.tunaSashimi 60g", "ing.cucumber 25g"]
+    },
   };
 
   // Function to get translated ingredients
@@ -224,7 +228,7 @@
     { nameKey: "cucumberAvocado", target: 2, note: "", ingKey: "cucumberAvocado" },
     { nameKey: "miniCucumber", target: 16, noteKey: "note.midAutumn 4", ingKey: "miniCucumber" },
     { nameKey: "egg", target: 1, noteKey: "note.midAutumn 4, note.dropShape 1", ingKey: "egg" },
-    // { nameKey: "tofuSeafood", target: 5, note: "", ingKey: "seafood" },
+    { nameKey: "spicyTunaRoll", target: 2, noteKey: "note.tunaSashimi", ingKey: "tunaSashimi" },
     { nameKey: "salmonAvocado", target: 12, noteKey: "note.triangle 3 - note.canadaA／2 - note.thousandIsland／2／5-ST2", ingKey: "salmonAvocado" },
     { nameKey: "futomaki", target: 1, note: "", ingKey: "futomaki" },
     { nameKey: "cookedSalmon", target: 9, noteKey: "note.redTobiko 2 - note.thousandIsland／2 - note.chargrilled／5-ST2", ingKey: "cookedSalmon" },
@@ -932,8 +936,8 @@
       variants: [
         { titleKey: "note.gardenDelight1", styleKey: "ing.type1Inside", toppingsKeys: ["ing.blackWhiteSesame"], fillingsKeys: ["ing.pickledRadish 30g", "ing.redPepperShred 25g"] },
         { titleKey: "note.gardenDelight2", styleKey: "ing.type1Inside", toppingsKeys: ["ing.blackWhiteSesame"], fillingsKeys: ["ing.cucumber 20g", "ing.avocado 25g"] },
-        { titleKey: "note.gardenDelight3", styleKey: "ing.type2Inside", toppingsKeys: ["ing.blackWhiteSesame"], fillingsKeys: ["ing.cucumber 20g", "ing.redPepperShred 10g", "ing.carrotShred 20g"] },
-        { titleKey: "note.gardenDelight4", styleKey: "ing.type3Normal", toppingsKeys: [], fillingsKeys: ["ing.lettuce 2pcs", "ing.cucumber 30g", "ing.avocado 20g", "ing.pickledRadish 30g", "ing.redPepperShred 20g", "ing.carrotShred 15g"] }
+        { titleKey: "note.gardenDelight3", styleKey: "ing.type1Inside", toppingsKeys: ["ing.blackWhiteSesame"], fillingsKeys: ["ing.cucumber 20g", "ing.redPepperShred 10g", "ing.carrotShred 20g"] },
+        { titleKey: "note.gardenDelight4", styleKey: "ing.type3Normal", toppingsKeys: [], fillingsKeys: ["ing.lettuce 2pcs", "ing.cucumber 30g", "ing.avocado 20g", "ing.yellowPickle 30g", "ing.redPepperShred 20g", "ing.carrotShred 15g"] }
       ]
     },
     { nameKey: "miniSalmon", styleKey: "ing.type1Normal", toppingsKeys: [], fillingsKeys: ["ing.salmon 30g"] },
@@ -959,6 +963,7 @@
       notes: item.notesKey ? i18n.t(item.notesKey) : undefined,
       variants: item.variants ? item.variants.map(v => ({
         title: i18n.t(v.titleKey),
+        style: i18n.t(v.styleKey),
         toppings: v.toppingsKeys ? v.toppingsKeys.map(k => {
           const parts = k.split(' ');
           return parts.length > 1 ? i18n.t(parts[0]) + ' ' + parts[1] : i18n.t(k);
@@ -1049,11 +1054,13 @@
           <div class="title">${item.name}</div>
           ${item.variants.map(v => {
         const hasToppings = v.toppings && v.toppings.length > 0;
+        console.log(v)
         return `
             <div class="sec" style="border-top:1px dashed var(--border);padding-top:10px;margin-top:10px;">
               <div class="meta"><strong>${v.title}</strong></div>
               <div class="grid">
                 <div class="sec">
+                  <span class="tag">${i18n.t(v.style) || i18n.t('notes.styleUnknown')}</span>&nbsp;&nbsp;
                     ${hasToppings ? `
                   <span class="tag">${(v.toppings)}</span>
                   ` : ''}
@@ -1251,28 +1258,29 @@
       },
       sections: {
         prep: [
+          i18n.t('checklist.task.prep3'),
+          i18n.t('checklist.task.prep4'),
           i18n.t('checklist.task.prep1'),
           i18n.t('checklist.task.prep2'),
-          // i18n.t('checklist.task.prep3'),
-          // i18n.t('checklist.task.prep4')
+
         ],
         during: [
           i18n.t('checklist.task.during1'),
           i18n.t('checklist.task.during2'),
           i18n.t('checklist.task.during6'),
-          i18n.t('checklist.task.during3'),
-          i18n.t('checklist.task.during4'),
+          // i18n.t('checklist.task.during3'),
+          // i18n.t('checklist.task.during4'),
+          // i18n.t('checklist.task.during6'),
+          i18n.t('checklist.task.during7'),
           i18n.t('checklist.task.during5'),
-          i18n.t('checklist.task.during6'),
-          i18n.t('checklist.task.during7')
         ],
         post: [
           i18n.t('checklist.task.post1'),
           i18n.t('checklist.task.post2'),
           i18n.t('checklist.task.post3'),
           i18n.t('checklist.task.post4'),
-          i18n.t('checklist.task.post5'),
           i18n.t('checklist.task.post6'),
+          i18n.t('checklist.task.post5'),
           // i18n.t('checklist.task.post7'),
           // i18n.t('checklist.task.post8'),
           // i18n.t('checklist.task.post9'),
@@ -1551,7 +1559,7 @@
           i18n.t('checklist2.task.prep1'),
           i18n.t('checklist2.task.prep2'),
           i18n.t('checklist2.task.prep3'),
-          i18n.t('checklist2.task.prep4')
+          // i18n.t('checklist2.task.prep4')
         ],
         during: [
           i18n.t('checklist2.task.during1'),
@@ -1560,7 +1568,9 @@
           i18n.t('checklist2.task.during4'),
           i18n.t('checklist2.task.during5'),
           i18n.t('checklist2.task.during6'),
-          i18n.t('checklist2.task.during7')
+          i18n.t('checklist2.task.during7'),
+          i18n.t('checklist2.task.during8'),
+          i18n.t('checklist2.task.during9'),
         ],
         post: [
           i18n.t('checklist2.task.post1'),
@@ -1572,7 +1582,6 @@
           i18n.t('checklist2.task.post7'),
           i18n.t('checklist2.task.post8'),
           i18n.t('checklist2.task.post9'),
-          i18n.t('checklist2.task.post11'),
           i18n.t('checklist2.task.post10')
         ]
       }
