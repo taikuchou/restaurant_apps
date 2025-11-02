@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>DT店 壽司部門完整指南</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft JhengHei", "微軟正黑體", sans-serif;
+            background: linear-gradient(135deg, #006838 0%, #004d29 100%);
+            min-height: 100vh;
+            padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .main-header {
+            background: white;
+            border-radius: 16px 16px 0 0;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            padding: 24px;
+            text-align: center;
+        }
+
+        .main-title {
+            color: #006838;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .main-subtitle {
+            color: #6b7280;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .publish-info {
+            color: #9ca3af;
+            font-size: 14px;
+            padding-top: 12px;
+            border-top: 2px solid #c8e6d7;
+        }
+
+        /* Tab Navigation */
+        .tab-navigation {
+            background: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            margin-bottom: 20px;
+        }
+
+        .tab-button {
+            flex: 1;
+            max-width: 300px;
+            padding: 16px 24px;
+            background: white;
+            border: none;
+            border-bottom: 3px solid #e5e7eb;
+            color: #6b7280;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .tab-button:hover {
+            background: #f9fafb;
+            color: #006838;
+        }
+
+        .tab-button.active {
+            color: #006838;
+            border-bottom-color: #006838;
+            background: #e8f5f0;
+        }
+
+        .tab-button:first-child {
+            border-radius: 0 0 0 16px;
+        }
+
+        .tab-button:last-child {
+            border-radius: 0 0 16px 0;
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+
+        .section {
+            margin-bottom: 24px;
+        }
+
+        .section-title {
+            color: #006838;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            background: #006838;
+            color: white;
+            border-radius: 50%;
+            font-size: 14px;
+            font-weight: 700;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        .section-content {
+            color: #4a5568;
+            font-size: 16px;
+            line-height: 1.8;
+            padding-left: 38px;
+        }
+
+        .subsection {
+            margin-top: 12px;
+            padding-left: 20px;
+        }
+
+        .bullet-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .bullet-list li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 8px;
+        }
+
+        .bullet-list li::before {
+            content: "•";
+            position: absolute;
+            left: 8px;
+            color: #006838;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .task-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .task-list li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 10px;
+            line-height: 1.7;
+        }
+
+        .task-number {
+            position: absolute;
+            left: 0;
+            color: #006838;
+            font-weight: 600;
+        }
+
+        .highlight {
+            background: #fef3c7;
+            padding: 12px;
+            border-radius: 8px;
+            border-left: 4px solid #f59e0b;
+            margin-top: 8px;
+        }
+
+        .tab-icon {
+            display: inline-block;
+            margin-right: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 12px;
+            }
+
+            .main-header {
+                padding: 16px;
+                border-radius: 12px 12px 0 0;
+            }
+
+            .main-title {
+                font-size: 22px;
+            }
+
+            .main-subtitle {
+                font-size: 14px;
+            }
+
+            .tab-button {
+                padding: 12px 16px;
+                font-size: 14px;
+            }
+
+            .tab-button:first-child {
+                border-radius: 0 0 0 12px;
+            }
+
+            .tab-button:last-child {
+                border-radius: 0 0 12px 0;
+            }
+
+            .card {
+                padding: 16px;
+                border-radius: 12px;
+            }
+
+            .section-title {
+                font-size: 16px;
+            }
+
+            .section-content {
+                font-size: 15px;
+                padding-left: 0;
+            }
+
+            .section-number {
+                width: 24px;
+                height: 24px;
+                font-size: 12px;
+            }
+
+            .task-list li {
+                padding-left: 26px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Main Header -->
+        <div class="main-header">
+            <div class="main-title">🍣 DT店 壽司部門完整指南</div>
+            <!-- <div class="main-subtitle">工作要求 & 崗位安排</div> -->
+            <div class="publish-info">📅 最後更新：2025/10/31</div>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="tab-navigation">
+            <button class="tab-button active" onclick="switchTab('requirements')">
+                <span class="tab-icon">📋</span>工作要求
+            </button>
+            <button class="tab-button" onclick="switchTab('assignments')">
+                <span class="tab-icon">👥</span>崗位安排
+            </button>
+        </div>
+
+        <!-- Tab Content: Requirements -->
+        <div id="requirements" class="tab-content active">
+            <div class="card">
+                <div class="section">
+                    <div class="section-title">
+                        <span class="section-number">1</span>
+                        產品質量與衛生標準
+                    </div>
+                    <div class="section-content">
+                        為確保壽司產品的品質與銷量，所有員工需以認真、專業的態度，嚴格遵循壽司製作要求及衛生標準，精心完成每一份壽司產品。
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">
+                        <span class="section-number">2</span>
+                        團隊合作與庫存管理
+                    </div>
+                    <div class="section-content">
+                        為保證壽司部門正常運作，員工需在完成本崗位職責的基礎上，發揮團隊合作精神，互相包容。請密切留意崗位庫存情況，及時向主管反映缺貨問題，以便安排訂貨。每天下班前，務必檢查冰箱內次日所需食材，互相提醒，確保準備充分。
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">
+                        <span class="section-number">3</span>
+                        飯量控制
+                    </div>
+                    <div class="section-content">
+                        煮飯員工需特別注意飯量供應，確保下午3點左右不缺飯，同時避免剩飯過多。請根據每日需求靈活調整飯量，保持用心。
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">
+                        <span class="section-number">4</span>
+                        壽司卷處理
+                    </div>
+                    <div class="section-content">
+                        包好的壽司卷應盡快切成成品。若無法立即處理，需放入冰箱保存，必要時可使用急速冷凍機降溫以保持新鮮。
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">
+                        <span class="section-number">5</span>
+                        壽司陳列與調整
+                    </div>
+                    <div class="section-content">
+                        員工需經常檢查並整理壽司陳列框，遵循「少量多補」原則，及時補充缺貨品項。發現牛油果變黑等品質問題應立即處理。根據天氣、日期、人流量及季節，靈活調整晚餐壽司的製作時間與產量，確保產品新鮮。
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">
+                        <span class="section-number">6</span>
+                        小菜管理
+                    </div>
+                    <div class="section-content">
+                        確保小菜備貨充足，避免補貨時缺貨。若小菜銷量較低，需定期檢查貨架上小菜的品質，而非僅依賴保質期。切壽司蛋的刀具與砧板必須保持乾淨，以防蛋品變質。
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">
+                        <span class="section-number">7</span>
+                        三文魚與帶子處理
+                    </div>
+                    <div class="section-content">
+                        當天切好的三文魚應盡量於次日使用，避免多次解凍影響新鮮度。帶子需同樣謹慎處理。
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">
+                        <span class="section-number">8</span>
+                        產品優先順序
+                    </div>
+                    <div class="section-content">
+                        工作優先順序如下：
+                        <div class="highlight">
+                            <ul class="bullet-list">
+                                <li><strong>第一優先：</strong>Weekly Promotion（每週促銷產品）</li>
+                                <li><strong>第二優先：</strong>Top Sales（熱銷產品）</li>
+                                <li><strong>第三優先：</strong>Must Carry（必備產品）</li>
+                                <li><strong>最後：</strong>常規產品</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">
+                        <span class="section-number">9</span>
+                        熱飯盒製作與管理
+                    </div>
+                    <div class="section-content">
+                        熱飯盒需在每天上午11點前及下午5點前完成，具體數量如下：
+                        <div class="highlight">
+                            <ul class="bullet-list">
+                                <li>燒雞飯：12份</li>
+                                <li>鰻魚飯：6份</li>
+                                <li>日式三文飯：6份</li>
+                            </ul>
+                        </div>
+                        <div class="subsection">
+                            週六、週日中午需根據當天人流情況適當增減數量。若熱飯盒銷量較快，需及時補貨；若存放超過兩小時，需進行減價處理。
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">
+                        <span class="section-number">10</span>
+                        素食壽司製作
+                    </div>
+                    <div class="section-content">
+                        製作素食壽司卷時，刀具與砧板必須徹底清洗乾淨，確保符合全素食客人的食品安全需求。
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Content: Assignments -->
+        <div id="assignments" class="tab-content">
+            <div class="card">
+                <div class="section">
+                    <div class="section-title">
+                        <span class="section-number">1</span>
+                        出餐 A
+                    </div>
+                    <div class="section-content">
+                        <ul class="task-list">
+                            <li><span class="task-number">1.</span>煮飯 3锅 、並准備洗好下一輪煮飯3锅的米和做第二轮的飯。蒸熱醋飯。开打包機、清潔和處理展櫃食物。補好小菜。取回蒸飯。</li>
+                            <li><span class="task-number">2.</span>出餐 剌身、特價盘、組合盤（按第一轮要求的數量。與B位互相配合）。A-E盤（如果在有訂單時完成）。</li>
+                            <li><span class="task-number">3.</span>在12點前安排午餐。</li>
+                            <li><span class="task-number">4.</span>午餐後接替出餐B午餐。繼續補出餐 A、B位的出餐。直到出餐B回來。</li>
+                            <li><span class="task-number">5.</span>切三文魚3、COHO魚1。（數量根据剩余量和銷售情況確定切魚的數量）。</li>
+                            <li><span class="task-number">6.</span>填寫早上溫度表和出餐溫度表。</li>
+                            <li><span class="task-number">7.</span>备出餐的材料。清潔。</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">
+                        <span class="section-number">2</span>
+                        出餐 B
+                    </div>
+                    <div class="section-content">
+                        <ul class="task-list">
+                            <li><span class="task-number">1.</span>拍打飯粒。</li>
+                            <li><span class="task-number">2.</span>出餐ST2 .ST4.ST5 (按第一轮要求的數量。與A位互相配合）。在十一點半前完成並拍照上群。</li>
+                            <li><span class="task-number">3.</span>根據銷售情況，繼續補A.B位的出餐。直到A位回來午餐。</li>
+                            <li><span class="task-number">4.</span>午餐後繼續A.B位的出餐。</li>
+                            <li><span class="task-number">5.</span>备料（刨蘿卜絲和洗生菜）。在5點拍照上群。</li>
+                            <li><span class="task-number">6.</span>處理当天剩飯。最後清潔壽司部總清潔。</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">
+                        <span class="section-number">3</span>
+                        卷1
+                    </div>
+                    <div class="section-content">
+                        <ul class="task-list">
+                            <li><span class="task-number">1.</span>組裝包卷機并加油。打包壽司托盤、寿司卷席。</li>
+                            <li><span class="task-number">2.</span>完成第一輪包卷要求。（与卷2協調進度）。完成三角飯的貼價錢和擺到展櫃。</li>
+                            <li><span class="task-number">3.</span>在完成第一輪包卷數量後。根據需要繼續准备出餐用卷。</li>
+                            <li><span class="task-number">4.</span>在12點前午餐。</li>
+                            <li><span class="task-number">5.</span>准备包卷用的材料。</li>
+                            <li><span class="task-number">6.</span>切三文魚3。</li>
+                            <li><span class="task-number">7.</span>繼續完成晚間出餐用卷。</li>
+                            <li><span class="task-number">8.</span>清潔。</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">
+                        <span class="section-number">4</span>
+                        卷2
+                    </div>
+                    <div class="section-content">
+                        <ul class="task-list">
+                            <li><span class="task-number">1.</span>將煮好的第一轮飯打成壽司飯。做好壽司飯酸鹼度測試。</li>
+                            <li><span class="task-number">2.</span>完成包卷數量。（白加州9 、加州40、 三文魚卷20、海鮮卷5）</li>
+                            <li><span class="task-number">3.</span>在10點左右先將飯合用的雞和三文魚拿到廚房加工。</li>
+                            <li><span class="task-number">4.</span>打第二轮壽司饭。</li>
+                            <li><span class="task-number">5.</span>開始做Bento飯（雞飯6-三文魚飯6-鳗魚飯6-雞飯6）。</li>
+                            <li><span class="task-number">6.</span>做鰻魚冷飯6-8。</li>
+                            <li><span class="task-number">7.</span>备小菜和切雞、鰻魚。（小菜量架上4备貨4）。</li>
+                            <li><span class="task-number">8.</span>再煮三鍋飯。午餐。</li>
+                            <li><span class="task-number">9.</span>打壽司飯。送雞、三文魚到廚房加工。繼續完成晚餐BENTO。（雞飯6-三文魚飯6-鰻魚飯6-雞飯6-12）。</li>
+                            <li><span class="task-number">10.</span>备貨、清潔。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove active class from all buttons
+            const tabButtons = document.querySelectorAll('.tab-button');
+            tabButtons.forEach(button => {
+                button.classList.remove('active');
+            });
+
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+
+            // Add active class to clicked button
+            event.target.closest('.tab-button').classList.add('active');
+
+            // Scroll to top smoothly
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
