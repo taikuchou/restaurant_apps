@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>出餐B - 壽司出餐清單</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Microsoft JhengHei", "微軟正黑體", Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            text-align: center;
+            padding: 60px 20px;
+            background-color: #f9f9f9;
+            margin-bottom: 40px;
+            border-radius: 8px;
+        }
+
+        .header h1 {
+            font-size: 72px;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .header p {
+            font-size: 20px;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .item {
+            margin-bottom: 50px;
+            padding: 30px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .item:hover {
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .item-info {
+            padding: 20px;
+        }
+
+        .item-info h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        .item-info .spec {
+            margin: 12px 0;
+            font-size: 18px;
+            color: #555;
+        }
+
+        .item-info .spec strong {
+            color: #2c3e50;
+            min-width: 120px;
+            display: inline-block;
+        }
+
+        .item-info .notes {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            font-size: 16px;
+            color: #856404;
+            line-height: 1.8;
+        }
+
+        .item-image {
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+        }
+
+        .item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .placeholder {
+            text-align: center;
+            color: #999;
+            padding: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .item {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 48px;
+            }
+
+            .item-info h2 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>出餐B</h1>
+            <p>三寶是指醬油、薑和芥末，一定要按照醬油、薑和芥末的順序排列</p>
+        </div>
+
+        <!-- Item 1: 三文魚腩壽司 -->
+        <div class="item">
+            <div class="item-info">
+                <h2>三文魚腩壽司</h2>
+                <div class="spec"><strong>盒子：</strong>ST2</div>
+                <div class="spec"><strong>三寶：</strong>111</div>
+                <div class="spec"><strong>第1輪出餐數量：</strong>4</div>
+            </div>
+            <div class="item-image">
+                <div class="placeholder">【三文魚腩壽司圖片】<br>藍色盒子中的橙色三文魚腩壽司</div>
+            </div>
+        </div>
+
+        <!-- Item 2: 鰻魚壽司 -->
+        <div class="item">
+            <div class="item-info">
+                <h2>鰻魚壽司</h2>
+                <div class="spec"><strong>盒子：</strong>ST2</div>
+                <div class="spec"><strong>三寶：</strong>111</div>
+                <div class="spec"><strong>第1輪出餐數量：</strong>4</div>
+                <div class="notes">*掃鰻魚汁，加芝麻</div>
+            </div>
+            <div class="item-image">
+                <div class="placeholder">【鰻魚壽司圖片】<br>帶鰻魚汁和芝麻的鰻魚壽司</div>
+            </div>
+        </div>
+
+        <!-- Item 3: 田園組合壽司 -->
+        <div class="item">
+            <div class="item-info">
+                <h2>田園組合壽司</h2>
+                <div class="spec"><strong>盒子：</strong>ST5</div>
+                <div class="spec"><strong>三寶：</strong>211</div>
+                <div class="spec"><strong>第1輪出餐數量：</strong>2</div>
+            </div>
+            <div class="item-image">
+                <div class="placeholder">【田園組合壽司圖片】<br>各種蔬菜組合的壽司卷</div>
+            </div>
+        </div>
+
+        <!-- Item 4: 牛油果卷 -->
+        <div class="item">
+            <div class="item-info">
+                <h2>牛油果卷</h2>
+                <div class="spec"><strong>盒子：</strong>ST2</div>
+                <div class="spec"><strong>三寶：</strong>111</div>
+                <div class="spec"><strong>第1輪出餐數量：</strong>3</div>
+                <div class="notes">*壽司卷傾斜45度角擺放，傾斜45度角立起來</div>
+            </div>
+            <div class="item-image">
+                <div class="placeholder">【牛油果卷圖片】<br>傾斜45度擺放的牛油果壽司卷</div>
+            </div>
+        </div>
+
+        <!-- Item 5: 青瓜牛油卷 -->
+        <div class="item">
+            <div class="item-info">
+                <h2>青瓜牛油卷</h2>
+                <div class="spec"><strong>盒子：</strong>ST2</div>
+                <div class="spec"><strong>三寶：</strong>111</div>
+                <div class="spec"><strong>第1輪出餐數量：</strong>2</div>
+                <div class="notes">*壽司卷平躺，傾斜45度角擺放</div>
+            </div>
+            <div class="item-image">
+                <div class="placeholder">【青瓜牛油卷圖片】<br>青瓜和牛油果的壽司卷</div>
+            </div>
+        </div>
+
+        <!-- Item 6: 三文卷（大） -->
+        <div class="item">
+            <div class="item-info">
+                <h2>三文卷（大）</h2>
+                <div class="spec"><strong>盒子：</strong>ST2</div>
+                <div class="spec"><strong>三寶：</strong>111</div>
+                <div class="spec"><strong>第1輪出餐數量：</strong>4</div>
+            </div>
+            <div class="item-image">
+                <div class="placeholder">【三文卷（大）圖片】<br>大號三文魚壽司卷</div>
+            </div>
+        </div>
+
+        <!-- Item 7: 青瓜卷（大） -->
+        <div class="item">
+            <div class="item-info">
+                <h2>青瓜卷（大）</h2>
+                <div class="spec"><strong>盒子：</strong>ST2</div>
+                <div class="spec"><strong>三寶：</strong>111</div>
+                <div class="spec"><strong>第1輪出餐數量：</strong>4</div>
+            </div>
+            <div class="item-image">
+                <div class="placeholder">【青瓜卷（大）圖片】<br>大號青瓜壽司卷</div>
+            </div>
+        </div>
+
+        <!-- Item 8: 加州卷 -->
+        <div class="item">
+            <div class="item-info">
+                <h2>加州卷</h2>
+                <div class="spec"><strong>盒子：</strong>ST2</div>
+                <div class="spec"><strong>三寶：</strong>111</div>
+                <div class="spec"><strong>第1輪出餐數量：</strong>5</div>
+                <div class="notes">*壽司卷傾斜45度角擺放，傾斜45度角立起來</div>
+            </div>
+            <div class="item-image">
+                <div class="placeholder">【加州卷圖片】<br>經典加州壽司卷</div>
+            </div>
+        </div>
+
+        <!-- Item 9: 辣加州卷 -->
+        <div class="item">
+            <div class="item-info">
+                <h2>辣加州卷</h2>
+                <div class="spec"><strong>盒子：</strong>ST2</div>
+                <div class="spec"><strong>三寶：</strong>111</div>
+                <div class="spec"><strong>第1輪出餐數量：</strong>5</div>
+                <div class="notes">*壽司卷平躺，傾斜45度角擺放，擠辣美乃滋</div>
+            </div>
+            <div class="item-image">
+                <div class="placeholder">【辣加州卷圖片】<br>帶辣美乃滋的加州卷</div>
+            </div>
+        </div>
+
+        <!-- Item 10: 牛油果三文魚卷 -->
+        <div class="item">
+            <div class="item-info">
+                <h2>牛油果三文魚卷</h2>
+                <div class="spec"><strong>盒子：</strong>ST2</div>
+                <div class="spec"><strong>三寶：</strong>111</div>
+                <div class="spec"><strong>第1輪出餐數量：</strong>5</div>
+                <div class="notes">*壽司卷傾斜45度角擺放，傾斜45度角立起來</div>
+            </div>
+            <div class="item-image">
+                <div class="placeholder">【牛油果三文魚卷圖片】<br>牛油果和三文魚的組合壽司卷</div>
+            </div>
+        </div>
+
+        <!-- Item 11: 香辣海鮮卷 -->
+        <div class="item">
+            <div class="item-info">
+                <h2>香辣海鮮卷</h2>
+                <div class="spec"><strong>盒子：</strong>ST2</div>
+                <div class="spec"><strong>三寶：</strong>111</div>
+                <div class="spec"><strong>第1輪出餐數量：</strong>3</div>
+                <div class="notes">*壽司卷平躺，傾斜45度角擺放，擠辣美乃滋，放橙魚子</div>
+            </div>
+            <div class="item-image">
+                <div class="placeholder">【香辣海鮮卷圖片】<br>帶橙魚子的香辣海鮮卷</div>
+            </div>
+        </div>
+
+        <!-- Item 12: 天婦羅蝦卷 -->
+        <div class="item">
+            <div class="item-info">
+                <h2>天婦羅蝦卷</h2>
+                <div class="spec"><strong>盒子：</strong>ST5</div>
+                <div class="spec"><strong>三寶：</strong>211</div>
+                <div class="spec"><strong>第1輪出餐數量：</strong>3</div>
+                <div class="notes">*壽司卷平躺，擠鰻魚汁，擠美乃滋，兩種醬汁錯開</div>
+            </div>
+            <div class="item-image">
+                <div class="placeholder">【天婦羅蝦卷圖片】<br>天婦羅蝦壽司卷配雙醬</div>
+            </div>
+        </div>
+
+        <!-- Item 13: 辣炸蝦卷 -->
+        <div class="item">
+            <div class="item-info">
+                <h2>辣炸蝦卷</h2>
+                <div class="spec"><strong>盒子：</strong>ST5</div>
+                <div class="spec"><strong>三寶：</strong>211</div>
+                <div class="spec"><strong>第1輪出餐數量：</strong>3</div>
+                <div class="notes">*壽司卷平躺，擠鰻魚汁，擠辣美乃滋，兩種醬汁錯開</div>
+            </div>
+            <div class="item-image">
+                <div class="placeholder">【辣炸蝦卷圖片】<br>辣味炸蝦壽司卷</div>
+            </div>
+        </div>
+
+        <!-- Item 14: 脆龍卷 -->
+        <div class="item">
+            <div class="item-info">
+                <h2>脆龍卷</h2>
+                <div class="spec"><strong>盒子：</strong>ST5</div>
+                <div class="spec"><strong>三寶：</strong>111</div>
+                <div class="spec"><strong>第1輪出餐數量：</strong>3</div>
+                <div class="notes">*擠鰻魚汁，擠美乃滋，兩種醬汁錯開。放較多的天婦羅脆，放紅魚子，撒黑芝麻</div>
+            </div>
+            <div class="item-image">
+                <div class="placeholder">【脆龍卷圖片】<br>帶天婦羅脆、紅魚子和黑芝麻的脆龍卷</div>
+            </div>
+        </div>
+
+        <!-- Item 15: 熟三文卷 -->
+        <div class="item">
+            <div class="item-info">
+                <h2>熟三文卷</h2>
+                <div class="spec"><strong>盒子：</strong>ST2</div>
+                <div class="spec"><strong>三寶：</strong>111</div>
+                <div class="spec"><strong>第1輪出餐數量：</strong>2</div>
+                <div class="notes">*壽司卷平躺，傾斜45度角擺放，擠鰻魚汁，擠美乃滋，兩種醬汁錯開</div>
+            </div>
+            <div class="item-image">
+                <div class="placeholder">【熟三文卷圖片】<br>熟三文魚壽司卷配雙醬</div>
+            </div>
+        </div>
+
+        <!-- Item 16: 辣熟三文卷 -->
+        <div class="item">
+            <div class="item-info">
+                <h2>辣熟三文卷</h2>
+                <div class="spec"><strong>盒子：</strong>ST2</div>
+                <div class="spec"><strong>三寶：</strong>111</div>
+                <div class="spec"><strong>第1輪出餐數量：</strong>2</div>
+                <div class="notes">*壽司卷平躺，傾斜45度角擺放，擠鰻魚汁，擠辣美乃滋，兩種醬汁錯開</div>
+            </div>
+            <div class="item-image">
+                <div class="placeholder">【辣熟三文卷圖片】<br>辣味熟三文魚壽司卷</div>
+            </div>
+        </div>
+
+        <!-- Item 17: 炭燒三文魚壽司 -->
+        <div class="item">
+            <div class="item-info">
+                <h2>炭燒三文魚壽司</h2>
+                <div class="spec"><strong>盒子：</strong>ST4</div>
+                <div class="spec"><strong>三寶：</strong>111</div>
+                <div class="spec"><strong>第1輪出餐數量：</strong>4</div>
+                <div class="notes">*2個coho壽司，2個三文魚片壽司。4個熟三文卷的上面點鰻魚汁</div>
+            </div>
+            <div class="item-image">
+                <div class="placeholder">【炭燒三文魚壽司圖片】<br>炭燒三文魚組合壽司</div>
+            </div>
+        </div>
+
+        <!-- Item 18: 三文魚組合壽司 -->
+        <div class="item">
+            <div class="item-info">
+                <h2>三文魚組合壽司</h2>
+                <div class="spec"><strong>盒子：</strong>ST5</div>
+                <div class="spec"><strong>三寶：</strong>211</div>
+                <div class="spec"><strong>第1輪出餐數量：</strong>4</div>
+                <div class="notes">*6個三文魚片壽司，5個加州卷</div>
+            </div>
+            <div class="item-image">
+                <div class="placeholder">【三文魚組合壽司圖片】<br>三文魚片壽司和加州卷的組合</div>
+            </div>
+        </div>
+
+        <!-- Item 19: 佐渡壽司 -->
+        <div class="item">
+            <div class="item-info">
+                <h2>佐渡壽司</h2>
+                <div class="spec"><strong>盒子：</strong>ST5</div>
+                <div class="spec"><strong>三寶：</strong>211</div>
+                <div class="spec"><strong>第1輪出餐數量：</strong>4</div>
+                <div class="notes">*coho壽司、甜蝦壽司、三文魚片壽司、帶子壽司、鰻魚壽司。5個白加州卷</div>
+            </div>
+            <div class="item-image">
+                <div class="placeholder">【佐渡壽司圖片】<br>多種壽司的精選組合</div>
+            </div>
+        </div>
+
+        <!-- Item 20: 加拿大壽司A -->
+        <div class="item">
+            <div class="item-info">
+                <h2>加拿大壽司A</h2>
+                <div class="spec"><strong>盒子：</strong>ST5</div>
+                <div class="spec"><strong>三寶：</strong>211</div>
+                <div class="spec"><strong>第1輪出餐數量：</strong>4</div>
+                <div class="notes">*6個三角形的牛油果三文魚卷，一片三文魚片卷成花形，加紅魚子。coho壽司、甜蝦壽司、鰻魚壽司。三個帶魚子的白加州，擠美乃滋，加天婦羅脆和紅魚子</div>
+            </div>
+            <div class="item-image">
+                <div class="placeholder">【加拿大壽司A圖片】<br>精緻的加拿大風格壽司組合</div>
+            </div>
+        </div>
+
+        <!-- Item 21: 卷物結合壽司 -->
+        <div class="item">
+            <div class="item-info">
+                <h2>卷物結合壽司</h2>
+                <div class="spec"><strong>盒子：</strong>ST5</div>
+                <div class="spec"><strong>三寶：</strong>211</div>
+                <div class="spec"><strong>第1輪出餐數量：</strong>4</div>
+                <div class="notes">*壽司卷儘量擺成一條線</div>
+            </div>
+            <div class="item-image">
+                <div class="placeholder">【卷物結合壽司圖片】<br>各種壽司卷的組合</div>
+            </div>
+        </div>
+
+        <!-- Item 22: 雜錦卷物組合 -->
+        <div class="item">
+            <div class="item-info">
+                <h2>雜錦卷物組合</h2>
+                <div class="spec"><strong>盒子：</strong>ST5</div>
+                <div class="spec"><strong>三寶：</strong>211</div>
+                <div class="spec"><strong>第1輪出餐數量：</strong>5</div>
+                <div class="notes">*3個海鮮卷，3個牛油果三文魚卷，6個加州卷。壽司卷平躺，傾斜45度角擺放。第1列海鮮卷和第3加州卷列擠辣美乃滋，海鮮卷放橙魚子</div>
+            </div>
+            <div class="item-image">
+                <div class="placeholder">【雜錦卷物組合圖片】<br>豐富的壽司卷組合</div>
+            </div>
+        </div>
+
+        <!-- Item 23: 稻禾壽司組合 -->
+        <div class="item">
+            <div class="item-info">
+                <h2>稻禾壽司組合</h2>
+                <div class="spec"><strong>盒子：</strong>ST5</div>
+                <div class="spec"><strong>三寶：</strong>211</div>
+                <div class="spec"><strong>第1輪出餐數量：</strong>3</div>
+                <div class="notes">*coho壽司、甜蝦壽司。蟹肉辣美乃滋腐皮壽司、毛豆沙拉腐皮壽司。5個帶魚子的白加州卷，擠美乃滋，放天婦羅脆和紅魚子。</div>
+            </div>
+            <div class="item-image">
+                <div class="placeholder">【稻禾壽司組合圖片】<br>包含腐皮壽司的特色組合</div>
+            </div>
+        </div>
+
+        <!-- Item 24: 辣吞拿魚卷 -->
+        <div class="item">
+            <div class="item-info">
+                <h2>辣吞拿魚卷</h2>
+                <div class="spec"><strong>盒子：</strong>ST2</div>
+                <div class="spec"><strong>三寶：</strong>111</div>
+                <div class="spec"><strong>第1輪出餐數量：</strong>1-4（視乎吞拿魚的量而定）</div>
+                <div class="notes">*壽司卷平躺，傾斜45度角擺放，擠辣美乃滋，放蔥花</div>
+            </div>
+            <div class="item-image">
+                <div class="placeholder">【辣吞拿魚卷圖片】<br>帶蔥花的辣吞拿魚卷</div>
+            </div>
+        </div>
+
+        <!-- Item 25: 辣三文卷 -->
+        <div class="item">
+            <div class="item-info">
+                <h2>辣三文卷</h2>
+                <div class="spec"><strong>盒子：</strong>ST2</div>
+                <div class="spec"><strong>三寶：</strong>111</div>
+                <div class="spec"><strong>第1輪出餐數量：</strong>5左右（視乎三文魚碎的量而定）</div>
+                <div class="notes">*壽司卷平躺，傾斜45度角擺放，擠辣美乃滋，放天婦羅脆</div>
+            </div>
+            <div class="item-image">
+                <div class="placeholder">【辣三文卷圖片】<br>帶天婦羅脆的辣三文魚卷</div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
