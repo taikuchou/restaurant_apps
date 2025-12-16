@@ -1,492 +1,904 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>出餐B - 壽司出餐清單</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>出餐B - 壽司出餐清單</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        body {
-            font-family: "Microsoft JhengHei", "微軟正黑體", Arial, sans-serif;
-            background-color: #f5f5f5;
-            padding: 20px;
-            line-height: 1.6;
-        }
+    :root {
+      --primary-color: #8d2c5f;
+      --secondary-color: #c54a90;
+      --success-color: #28a745;
+      --light-bg: #f8f9fa;
+      --card-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      --border-radius: 8px;
+      --warning-bg: #fff3cd;
+      --warning-border: #ffc107;
+      --warning-text: #856404;
+    }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background-color: white;
-            padding: 40px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft JhengHei', sans-serif;
+      background: var(--light-bg);
+      padding: 1rem;
+      padding-bottom: env(safe-area-inset-bottom);
+      line-height: 1.6;
+      color: #333;
+    }
 
-        .header {
-            text-align: center;
-            padding: 60px 20px;
-            background-color: #f9f9f9;
-            margin-bottom: 40px;
-            border-radius: 8px;
-        }
+    .header {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      padding: 2rem 1.5rem;
+      border-radius: var(--border-radius);
+      margin-bottom: 1.5rem;
+      box-shadow: var(--card-shadow);
+      text-align: center;
+    }
 
-        .header h1 {
-            font-size: 72px;
-            margin-bottom: 30px;
-            color: #333;
-        }
+    .header h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
 
-        .header p {
-            font-size: 20px;
-            color: #666;
-            line-height: 1.8;
-        }
+    .header p {
+      font-size: 1rem;
+      opacity: 0.95;
+      line-height: 1.6;
+    }
 
-        .item {
-            margin-bottom: 50px;
-            padding: 30px;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            align-items: center;
-        }
+    .language-switcher {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
 
-        .item:hover {
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-        }
+    .lang-btn {
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      color: white;
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+      font-weight: 500;
+    }
 
-        .item-info {
-            padding: 20px;
-        }
+    .lang-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      border-color: rgba(255, 255, 255, 0.6);
+    }
 
-        .item-info h2 {
-            font-size: 32px;
-            margin-bottom: 20px;
-            color: #2c3e50;
-            border-bottom: 3px solid #3498db;
-            padding-bottom: 10px;
-        }
+    .lang-btn.active {
+      background: white;
+      color: var(--primary-color);
+      border-color: white;
+    }
 
-        .item-info .spec {
-            margin: 12px 0;
-            font-size: 18px;
-            color: #555;
-        }
+    .search-bar {
+      background: white;
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      margin-bottom: 1rem;
+      box-shadow: var(--card-shadow);
+    }
 
-        .item-info .spec strong {
-            color: #2c3e50;
-            min-width: 120px;
-            display: inline-block;
-        }
+    .search-bar input {
+      width: 100%;
+      padding: 0.75rem;
+      border: 2px solid #e0e0e0;
+      border-radius: var(--border-radius);
+      font-size: 1rem;
+      font-family: inherit;
+      transition: border-color 0.3s;
+    }
 
-        .item-info .notes {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: #fff3cd;
-            border-left: 4px solid #ffc107;
-            font-size: 16px;
-            color: #856404;
-            line-height: 1.8;
-        }
+    .search-bar input:focus {
+      outline: none;
+      border-color: var(--primary-color);
+    }
 
-        .item-image {
-            background-color: #f0f0f0;
-            border-radius: 8px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 400px;
-        }
+    .items-container {
+      display: grid;
+      gap: 1rem;
+    }
 
-        .item-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+    .item-card {
+      background: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--card-shadow);
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
 
-        .placeholder {
-            text-align: center;
-            color: #999;
-            padding: 20px;
-        }
+    .item-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    }
 
-        @media (max-width: 768px) {
-            .item {
-                grid-template-columns: 1fr;
-            }
+    .item-header {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      padding: 1rem;
+    }
 
-            .header h1 {
-                font-size: 48px;
-            }
+    .item-name {
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
 
-            .item-info h2 {
-                font-size: 24px;
-            }
-        }
-    </style>
+    .item-specs {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      font-size: 0.9rem;
+      opacity: 0.95;
+    }
+
+    .item-spec {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .item-spec-icon {
+      font-size: 1.1rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 20px;
+    }
+
+    .item-spec-label {
+      font-weight: 600;
+    }
+
+    .item-body {
+      padding: 1rem;
+    }
+
+    .item-image {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      border-radius: var(--border-radius);
+      margin-bottom: 1rem;
+    }
+
+    .item-notes {
+      background: var(--warning-bg);
+      border-left: 4px solid var(--warning-border);
+      padding: 0.75rem;
+      border-radius: 4px;
+      color: var(--warning-text);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .item-notes-icon {
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .item-notes-content {
+      flex: 1;
+    }
+
+    .no-results {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: #666;
+      font-size: 1.1rem;
+    }
+
+    .stats {
+      background: white;
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      margin-bottom: 1rem;
+      box-shadow: var(--card-shadow);
+      display: flex;
+      justify-content: space-around;
+      text-align: center;
+    }
+
+    .stat-item {
+      flex: 1;
+    }
+
+    .stat-value {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--primary-color);
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: #666;
+      margin-top: 0.25rem;
+    }
+
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 1.5rem;
+      }
+
+      .item-name {
+        font-size: 1.1rem;
+      }
+
+      .item-specs {
+        font-size: 0.85rem;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .items-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .items-container {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <h1>出餐B</h1>
-            <p>三寶是指醬油、薑和芥末，一定要按照醬油、薑和芥末的順序排列</p>
-        </div>
-
-        <!-- Item 1: 三文魚腩壽司 -->
-        <div class="item">
-            <div class="item-info">
-                <h2>三文魚腩壽司</h2>
-                <div class="spec"><strong>盒子：</strong>ST2</div>
-                <div class="spec"><strong>三寶：</strong>111</div>
-                <div class="spec"><strong>第1輪出餐數量：</strong>4</div>
-            </div>
-            <div class="item-image">
-                <div class="placeholder">【三文魚腩壽司圖片】<br>藍色盒子中的橙色三文魚腩壽司</div>
-            </div>
-        </div>
-
-        <!-- Item 2: 鰻魚壽司 -->
-        <div class="item">
-            <div class="item-info">
-                <h2>鰻魚壽司</h2>
-                <div class="spec"><strong>盒子：</strong>ST2</div>
-                <div class="spec"><strong>三寶：</strong>111</div>
-                <div class="spec"><strong>第1輪出餐數量：</strong>4</div>
-                <div class="notes">*掃鰻魚汁，加芝麻</div>
-            </div>
-            <div class="item-image">
-                <div class="placeholder">【鰻魚壽司圖片】<br>帶鰻魚汁和芝麻的鰻魚壽司</div>
-            </div>
-        </div>
-
-        <!-- Item 3: 田園組合壽司 -->
-        <div class="item">
-            <div class="item-info">
-                <h2>田園組合壽司</h2>
-                <div class="spec"><strong>盒子：</strong>ST5</div>
-                <div class="spec"><strong>三寶：</strong>211</div>
-                <div class="spec"><strong>第1輪出餐數量：</strong>2</div>
-            </div>
-            <div class="item-image">
-                <div class="placeholder">【田園組合壽司圖片】<br>各種蔬菜組合的壽司卷</div>
-            </div>
-        </div>
-
-        <!-- Item 4: 牛油果卷 -->
-        <div class="item">
-            <div class="item-info">
-                <h2>牛油果卷</h2>
-                <div class="spec"><strong>盒子：</strong>ST2</div>
-                <div class="spec"><strong>三寶：</strong>111</div>
-                <div class="spec"><strong>第1輪出餐數量：</strong>3</div>
-                <div class="notes">*壽司卷傾斜45度角擺放，傾斜45度角立起來</div>
-            </div>
-            <div class="item-image">
-                <div class="placeholder">【牛油果卷圖片】<br>傾斜45度擺放的牛油果壽司卷</div>
-            </div>
-        </div>
-
-        <!-- Item 5: 青瓜牛油卷 -->
-        <div class="item">
-            <div class="item-info">
-                <h2>青瓜牛油卷</h2>
-                <div class="spec"><strong>盒子：</strong>ST2</div>
-                <div class="spec"><strong>三寶：</strong>111</div>
-                <div class="spec"><strong>第1輪出餐數量：</strong>2</div>
-                <div class="notes">*壽司卷平躺，傾斜45度角擺放</div>
-            </div>
-            <div class="item-image">
-                <div class="placeholder">【青瓜牛油卷圖片】<br>青瓜和牛油果的壽司卷</div>
-            </div>
-        </div>
-
-        <!-- Item 6: 三文卷（大） -->
-        <div class="item">
-            <div class="item-info">
-                <h2>三文卷（大）</h2>
-                <div class="spec"><strong>盒子：</strong>ST2</div>
-                <div class="spec"><strong>三寶：</strong>111</div>
-                <div class="spec"><strong>第1輪出餐數量：</strong>4</div>
-            </div>
-            <div class="item-image">
-                <div class="placeholder">【三文卷（大）圖片】<br>大號三文魚壽司卷</div>
-            </div>
-        </div>
-
-        <!-- Item 7: 青瓜卷（大） -->
-        <div class="item">
-            <div class="item-info">
-                <h2>青瓜卷（大）</h2>
-                <div class="spec"><strong>盒子：</strong>ST2</div>
-                <div class="spec"><strong>三寶：</strong>111</div>
-                <div class="spec"><strong>第1輪出餐數量：</strong>4</div>
-            </div>
-            <div class="item-image">
-                <div class="placeholder">【青瓜卷（大）圖片】<br>大號青瓜壽司卷</div>
-            </div>
-        </div>
-
-        <!-- Item 8: 加州卷 -->
-        <div class="item">
-            <div class="item-info">
-                <h2>加州卷</h2>
-                <div class="spec"><strong>盒子：</strong>ST2</div>
-                <div class="spec"><strong>三寶：</strong>111</div>
-                <div class="spec"><strong>第1輪出餐數量：</strong>5</div>
-                <div class="notes">*壽司卷傾斜45度角擺放，傾斜45度角立起來</div>
-            </div>
-            <div class="item-image">
-                <div class="placeholder">【加州卷圖片】<br>經典加州壽司卷</div>
-            </div>
-        </div>
-
-        <!-- Item 9: 辣加州卷 -->
-        <div class="item">
-            <div class="item-info">
-                <h2>辣加州卷</h2>
-                <div class="spec"><strong>盒子：</strong>ST2</div>
-                <div class="spec"><strong>三寶：</strong>111</div>
-                <div class="spec"><strong>第1輪出餐數量：</strong>5</div>
-                <div class="notes">*壽司卷平躺，傾斜45度角擺放，擠辣美乃滋</div>
-            </div>
-            <div class="item-image">
-                <div class="placeholder">【辣加州卷圖片】<br>帶辣美乃滋的加州卷</div>
-            </div>
-        </div>
-
-        <!-- Item 10: 牛油果三文魚卷 -->
-        <div class="item">
-            <div class="item-info">
-                <h2>牛油果三文魚卷</h2>
-                <div class="spec"><strong>盒子：</strong>ST2</div>
-                <div class="spec"><strong>三寶：</strong>111</div>
-                <div class="spec"><strong>第1輪出餐數量：</strong>5</div>
-                <div class="notes">*壽司卷傾斜45度角擺放，傾斜45度角立起來</div>
-            </div>
-            <div class="item-image">
-                <div class="placeholder">【牛油果三文魚卷圖片】<br>牛油果和三文魚的組合壽司卷</div>
-            </div>
-        </div>
-
-        <!-- Item 11: 香辣海鮮卷 -->
-        <div class="item">
-            <div class="item-info">
-                <h2>香辣海鮮卷</h2>
-                <div class="spec"><strong>盒子：</strong>ST2</div>
-                <div class="spec"><strong>三寶：</strong>111</div>
-                <div class="spec"><strong>第1輪出餐數量：</strong>3</div>
-                <div class="notes">*壽司卷平躺，傾斜45度角擺放，擠辣美乃滋，放橙魚子</div>
-            </div>
-            <div class="item-image">
-                <div class="placeholder">【香辣海鮮卷圖片】<br>帶橙魚子的香辣海鮮卷</div>
-            </div>
-        </div>
-
-        <!-- Item 12: 天婦羅蝦卷 -->
-        <div class="item">
-            <div class="item-info">
-                <h2>天婦羅蝦卷</h2>
-                <div class="spec"><strong>盒子：</strong>ST5</div>
-                <div class="spec"><strong>三寶：</strong>211</div>
-                <div class="spec"><strong>第1輪出餐數量：</strong>3</div>
-                <div class="notes">*壽司卷平躺，擠鰻魚汁，擠美乃滋，兩種醬汁錯開</div>
-            </div>
-            <div class="item-image">
-                <div class="placeholder">【天婦羅蝦卷圖片】<br>天婦羅蝦壽司卷配雙醬</div>
-            </div>
-        </div>
-
-        <!-- Item 13: 辣炸蝦卷 -->
-        <div class="item">
-            <div class="item-info">
-                <h2>辣炸蝦卷</h2>
-                <div class="spec"><strong>盒子：</strong>ST5</div>
-                <div class="spec"><strong>三寶：</strong>211</div>
-                <div class="spec"><strong>第1輪出餐數量：</strong>3</div>
-                <div class="notes">*壽司卷平躺，擠鰻魚汁，擠辣美乃滋，兩種醬汁錯開</div>
-            </div>
-            <div class="item-image">
-                <div class="placeholder">【辣炸蝦卷圖片】<br>辣味炸蝦壽司卷</div>
-            </div>
-        </div>
-
-        <!-- Item 14: 脆龍卷 -->
-        <div class="item">
-            <div class="item-info">
-                <h2>脆龍卷</h2>
-                <div class="spec"><strong>盒子：</strong>ST5</div>
-                <div class="spec"><strong>三寶：</strong>111</div>
-                <div class="spec"><strong>第1輪出餐數量：</strong>3</div>
-                <div class="notes">*擠鰻魚汁，擠美乃滋，兩種醬汁錯開。放較多的天婦羅脆，放紅魚子，撒黑芝麻</div>
-            </div>
-            <div class="item-image">
-                <div class="placeholder">【脆龍卷圖片】<br>帶天婦羅脆、紅魚子和黑芝麻的脆龍卷</div>
-            </div>
-        </div>
-
-        <!-- Item 15: 熟三文卷 -->
-        <div class="item">
-            <div class="item-info">
-                <h2>熟三文卷</h2>
-                <div class="spec"><strong>盒子：</strong>ST2</div>
-                <div class="spec"><strong>三寶：</strong>111</div>
-                <div class="spec"><strong>第1輪出餐數量：</strong>2</div>
-                <div class="notes">*壽司卷平躺，傾斜45度角擺放，擠鰻魚汁，擠美乃滋，兩種醬汁錯開</div>
-            </div>
-            <div class="item-image">
-                <div class="placeholder">【熟三文卷圖片】<br>熟三文魚壽司卷配雙醬</div>
-            </div>
-        </div>
-
-        <!-- Item 16: 辣熟三文卷 -->
-        <div class="item">
-            <div class="item-info">
-                <h2>辣熟三文卷</h2>
-                <div class="spec"><strong>盒子：</strong>ST2</div>
-                <div class="spec"><strong>三寶：</strong>111</div>
-                <div class="spec"><strong>第1輪出餐數量：</strong>2</div>
-                <div class="notes">*壽司卷平躺，傾斜45度角擺放，擠鰻魚汁，擠辣美乃滋，兩種醬汁錯開</div>
-            </div>
-            <div class="item-image">
-                <div class="placeholder">【辣熟三文卷圖片】<br>辣味熟三文魚壽司卷</div>
-            </div>
-        </div>
-
-        <!-- Item 17: 炭燒三文魚壽司 -->
-        <div class="item">
-            <div class="item-info">
-                <h2>炭燒三文魚壽司</h2>
-                <div class="spec"><strong>盒子：</strong>ST4</div>
-                <div class="spec"><strong>三寶：</strong>111</div>
-                <div class="spec"><strong>第1輪出餐數量：</strong>4</div>
-                <div class="notes">*2個coho壽司，2個三文魚片壽司。4個熟三文卷的上面點鰻魚汁</div>
-            </div>
-            <div class="item-image">
-                <div class="placeholder">【炭燒三文魚壽司圖片】<br>炭燒三文魚組合壽司</div>
-            </div>
-        </div>
-
-        <!-- Item 18: 三文魚組合壽司 -->
-        <div class="item">
-            <div class="item-info">
-                <h2>三文魚組合壽司</h2>
-                <div class="spec"><strong>盒子：</strong>ST5</div>
-                <div class="spec"><strong>三寶：</strong>211</div>
-                <div class="spec"><strong>第1輪出餐數量：</strong>4</div>
-                <div class="notes">*6個三文魚片壽司，5個加州卷</div>
-            </div>
-            <div class="item-image">
-                <div class="placeholder">【三文魚組合壽司圖片】<br>三文魚片壽司和加州卷的組合</div>
-            </div>
-        </div>
-
-        <!-- Item 19: 佐渡壽司 -->
-        <div class="item">
-            <div class="item-info">
-                <h2>佐渡壽司</h2>
-                <div class="spec"><strong>盒子：</strong>ST5</div>
-                <div class="spec"><strong>三寶：</strong>211</div>
-                <div class="spec"><strong>第1輪出餐數量：</strong>4</div>
-                <div class="notes">*coho壽司、甜蝦壽司、三文魚片壽司、帶子壽司、鰻魚壽司。5個白加州卷</div>
-            </div>
-            <div class="item-image">
-                <div class="placeholder">【佐渡壽司圖片】<br>多種壽司的精選組合</div>
-            </div>
-        </div>
-
-        <!-- Item 20: 加拿大壽司A -->
-        <div class="item">
-            <div class="item-info">
-                <h2>加拿大壽司A</h2>
-                <div class="spec"><strong>盒子：</strong>ST5</div>
-                <div class="spec"><strong>三寶：</strong>211</div>
-                <div class="spec"><strong>第1輪出餐數量：</strong>4</div>
-                <div class="notes">*6個三角形的牛油果三文魚卷，一片三文魚片卷成花形，加紅魚子。coho壽司、甜蝦壽司、鰻魚壽司。三個帶魚子的白加州，擠美乃滋，加天婦羅脆和紅魚子</div>
-            </div>
-            <div class="item-image">
-                <div class="placeholder">【加拿大壽司A圖片】<br>精緻的加拿大風格壽司組合</div>
-            </div>
-        </div>
-
-        <!-- Item 21: 卷物結合壽司 -->
-        <div class="item">
-            <div class="item-info">
-                <h2>卷物結合壽司</h2>
-                <div class="spec"><strong>盒子：</strong>ST5</div>
-                <div class="spec"><strong>三寶：</strong>211</div>
-                <div class="spec"><strong>第1輪出餐數量：</strong>4</div>
-                <div class="notes">*壽司卷儘量擺成一條線</div>
-            </div>
-            <div class="item-image">
-                <div class="placeholder">【卷物結合壽司圖片】<br>各種壽司卷的組合</div>
-            </div>
-        </div>
-
-        <!-- Item 22: 雜錦卷物組合 -->
-        <div class="item">
-            <div class="item-info">
-                <h2>雜錦卷物組合</h2>
-                <div class="spec"><strong>盒子：</strong>ST5</div>
-                <div class="spec"><strong>三寶：</strong>211</div>
-                <div class="spec"><strong>第1輪出餐數量：</strong>5</div>
-                <div class="notes">*3個海鮮卷，3個牛油果三文魚卷，6個加州卷。壽司卷平躺，傾斜45度角擺放。第1列海鮮卷和第3加州卷列擠辣美乃滋，海鮮卷放橙魚子</div>
-            </div>
-            <div class="item-image">
-                <div class="placeholder">【雜錦卷物組合圖片】<br>豐富的壽司卷組合</div>
-            </div>
-        </div>
-
-        <!-- Item 23: 稻禾壽司組合 -->
-        <div class="item">
-            <div class="item-info">
-                <h2>稻禾壽司組合</h2>
-                <div class="spec"><strong>盒子：</strong>ST5</div>
-                <div class="spec"><strong>三寶：</strong>211</div>
-                <div class="spec"><strong>第1輪出餐數量：</strong>3</div>
-                <div class="notes">*coho壽司、甜蝦壽司。蟹肉辣美乃滋腐皮壽司、毛豆沙拉腐皮壽司。5個帶魚子的白加州卷，擠美乃滋，放天婦羅脆和紅魚子。</div>
-            </div>
-            <div class="item-image">
-                <div class="placeholder">【稻禾壽司組合圖片】<br>包含腐皮壽司的特色組合</div>
-            </div>
-        </div>
-
-        <!-- Item 24: 辣吞拿魚卷 -->
-        <div class="item">
-            <div class="item-info">
-                <h2>辣吞拿魚卷</h2>
-                <div class="spec"><strong>盒子：</strong>ST2</div>
-                <div class="spec"><strong>三寶：</strong>111</div>
-                <div class="spec"><strong>第1輪出餐數量：</strong>1-4（視乎吞拿魚的量而定）</div>
-                <div class="notes">*壽司卷平躺，傾斜45度角擺放，擠辣美乃滋，放蔥花</div>
-            </div>
-            <div class="item-image">
-                <div class="placeholder">【辣吞拿魚卷圖片】<br>帶蔥花的辣吞拿魚卷</div>
-            </div>
-        </div>
-
-        <!-- Item 25: 辣三文卷 -->
-        <div class="item">
-            <div class="item-info">
-                <h2>辣三文卷</h2>
-                <div class="spec"><strong>盒子：</strong>ST2</div>
-                <div class="spec"><strong>三寶：</strong>111</div>
-                <div class="spec"><strong>第1輪出餐數量：</strong>5左右（視乎三文魚碎的量而定）</div>
-                <div class="notes">*壽司卷平躺，傾斜45度角擺放，擠辣美乃滋，放天婦羅脆</div>
-            </div>
-            <div class="item-image">
-                <div class="placeholder">【辣三文卷圖片】<br>帶天婦羅脆的辣三文魚卷</div>
-            </div>
-        </div>
-
+  <div class="header">
+    <h1 id="pageTitle">出餐B - 壽司出餐清單</h1>
+    <p id="pageDescription">三寶是指醬油、薑和芥末，一定要按照醬油、薑和芥末的順序排列</p>
+    <div class="language-switcher">
+      <button class="lang-btn active" data-lang="zh-TW">繁</button>
+      <button class="lang-btn" data-lang="zh-CN">简</button>
+      <button class="lang-btn" data-lang="en">En</button>
     </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat-item">
+      <div class="stat-value" id="totalItems">25</div>
+      <div class="stat-label" id="statItemsLabel">壽司品項</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value" id="totalQuantity">0</div>
+      <div class="stat-label" id="statQuantityLabel">第1輪總數</div>
+    </div>
+  </div>
+
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="搜尋產品編號、壽司名稱、盒子或三寶代碼...">
+  </div>
+
+  <div class="items-container" id="itemsContainer"></div>
+
+  <script>
+    // i18n Translations
+    const translations = {
+      'zh-TW': {
+        pageTitle: '出餐B - 壽司出餐清單',
+        pageDescription: '三寶是指醬油、薑和芥末，一定要按照醬油、薑和芥末的順序排列',
+        statItemsLabel: '壽司品項',
+        statQuantityLabel: '第1輪總數',
+        searchPlaceholder: '搜尋產品編號、壽司名稱、盒子或三寶代碼...',
+        noResults: '沒有找到符合的壽司品項',
+        productCode: '產品編號',
+        box: '盒子',
+        threeSaucePackets: '三寶',
+        quantity: '數量',
+        notes: '備註',
+        icons: {
+          box: '📦',
+          threeSaucePackets: '🍶',
+          quantity: '🔢',
+          notes: '📝'
+        },
+        sushiNames: {
+          '674110': '三文魚腩壽司',
+          '22104': '鰻魚壽司',
+          '522089': '田園組合壽司',
+          '22282': '牛油果卷',
+          '697030': '青瓜牛油卷',
+          '719731': '三文卷（大）',
+          '719732': '青瓜卷（大）',
+          '22108': '加州卷',
+          '664465': '辣加州卷',
+          '696999': '牛油果三文魚卷',
+          '708707': '香辣海鮮卷',
+          '22117': '天婦羅蝦卷',
+          '660043': '辣天婦羅蝦卷',
+          '765637': '脆龍卷',
+          '22101': '熟三文卷',
+          '791932': '辣熟三文卷',
+          '774912': '炭燒三文魚壽司',
+          '22080': '三文魚組合壽司',
+          '22165': '佐渡壽司',
+          '22078': '加拿大壽司A',
+          '22249': '卷物結合壽司',
+          '730486': '雜錦卷物組合',
+          '528644': '稻禾壽司組合',
+          '22283': '辣吞拿魚卷',
+          '690870': '辣三文卷'
+        },
+        sushiNotes: {
+          '22104': '掃鰻魚汁，加芝麻',
+          '22282': '壽司卷傾斜45度角擺放，傾斜45度角立起來',
+          '697030': '壽司卷平躺，傾斜45度角擺放',
+          '22108': '壽司卷傾斜45度角擺放，傾斜45度角立起來',
+          '664465': '壽司卷平躺，傾斜45度角擺放，擠辣美乃滋',
+          '696999': '壽司卷傾斜45度角擺放，傾斜45度角立起來',
+          '708707': '壽司卷平躺，傾斜45度角擺放，擠辣美乃滋，放橙魚子',
+          '22117': '壽司卷平躺，擠鰻魚汁，擠美乃滋，兩種醬汁錯開',
+          '660043': '壽司卷平躺，擠鰻魚汁，擠辣美乃滋，兩種醬汁錯開',
+          '765637': '擠鰻魚汁，擠美乃滋，兩種醬汁錯開。放較多的天婦羅脆，放紅魚子，撒黑芝麻',
+          '22101': '壽司卷平躺，傾斜45度角擺放，擠鰻魚汁，擠美乃滋，兩種醬汁錯開',
+          '791932': '壽司卷平躺，傾斜45度角擺放，擠鰻魚汁，擠辣美乃滋，兩種醬汁錯開',
+          '774912': '2個coho壽司，2個三文魚片壽司。4個熟三文卷的上面點鰻魚汁',
+          '22080': '6個三文魚片壽司，5個加州卷',
+          '22165': 'coho壽司、甜蝦壽司、三文魚片壽司、帶子壽司、鰻魚壽司。5個白加州卷',
+          '22078': '6個三角形的牛油果三文魚卷，一片三文魚片卷成花形，加紅魚子。coho壽司、甜蝦壽司、鰻魚壽司。三個帶魚子的白加州，擠美乃滋，加天婦羅脆和紅魚子',
+          '22249': '壽司卷儘量擺成一條線',
+          '730486': '3個海鮮卷，3個牛油果三文魚卷，6個加州卷。壽司卷平躺，傾斜45度角擺放。第1列海鮮卷和第3加州卷列擠辣美乃滋，海鮮卷放橙魚子',
+          '528644': 'coho壽司、甜蝦壽司。蟹肉辣美乃滋腐皮壽司、毛豆沙拉腐皮壽司。5個帶魚子的白加州卷，擠美乃滋，放天婦羅脆和紅魚子。',
+          '22283': '壽司卷平躺，傾斜45度角擺放，擠辣美乃滋，放蔥花',
+          '690870': '壽司卷平躺，傾斜45度角擺放，擠辣美乃滋，放天婦羅脆'
+        }
+      },
+      'zh-CN': {
+        pageTitle: '出餐B - 寿司出餐清单',
+        pageDescription: '三宝是指酱油、姜和芥末，一定要按照酱油、姜和芥末的顺序排列',
+        statItemsLabel: '寿司品项',
+        statQuantityLabel: '第1轮总数',
+        searchPlaceholder: '搜索产品编号、寿司名称、盒子或三宝代码...',
+        noResults: '没有找到符合的寿司品项',
+        productCode: '产品编号',
+        box: '盒子',
+        threeSaucePackets: '三宝',
+        quantity: '数量',
+        notes: '备注',
+        icons: {
+          box: '📦',
+          threeSaucePackets: '🍶',
+          quantity: '🔢',
+          notes: '📝'
+        },
+        sushiNames: {
+          '674110': '三文鱼腩寿司',
+          '22104': '鳗鱼寿司',
+          '522089': '田园组合寿司',
+          '22282': '牛油果卷',
+          '697030': '青瓜牛油卷',
+          '719731': '三文卷（大）',
+          '719732': '青瓜卷（大）',
+          '22108': '加州卷',
+          '664465': '辣加州卷',
+          '696999': '牛油果三文鱼卷',
+          '708707': '香辣海鲜卷',
+          '22117': '天妇罗虾卷',
+          '660043': '辣天妇罗虾卷',
+          '765637': '脆龙卷',
+          '22101': '熟三文卷',
+          '791932': '辣熟三文卷',
+          '774912': '炭烧三文鱼寿司',
+          '22080': '三文鱼组合寿司',
+          '22165': '佐渡寿司',
+          '22078': '加拿大寿司A',
+          '22249': '卷物结合寿司',
+          '730486': '杂锦卷物组合',
+          '528644': '稻荷寿司组合',
+          '22283': '辣吞拿鱼卷',
+          '690870': '辣三文卷'
+        },
+        sushiNotes: {
+          '22104': '扫鳗鱼汁，加芝麻',
+          '22282': '寿司卷倾斜45度角摆放，倾斜45度角立起来',
+          '697030': '寿司卷平躺，倾斜45度角摆放',
+          '22108': '寿司卷倾斜45度角摆放，倾斜45度角立起来',
+          '664465': '寿司卷平躺，倾斜45度角摆放，挤辣美乃滋',
+          '696999': '寿司卷倾斜45度角摆放，倾斜45度角立起来',
+          '708707': '寿司卷平躺，倾斜45度角摆放，挤辣美乃滋，放橙鱼子',
+          '22117': '寿司卷平躺，挤鳗鱼汁，挤美乃滋，两种酱汁错开',
+          '660043': '寿司卷平躺，挤鳗鱼汁，挤辣美乃滋，两种酱汁错开',
+          '765637': '挤鳗鱼汁，挤美乃滋，两种酱汁错开。放较多的天妇罗脆，放红鱼子，撒黑芝麻',
+          '22101': '寿司卷平躺，倾斜45度角摆放，挤鳗鱼汁，挤美乃滋，两种酱汁错开',
+          '791932': '寿司卷平躺，倾斜45度角摆放，挤鳗鱼汁，挤辣美乃滋，两种酱汁错开',
+          '774912': '2个coho寿司，2个三文鱼片寿司。4个熟三文卷的上面点鳗鱼汁',
+          '22080': '6个三文鱼片寿司，5个加州卷',
+          '22165': 'coho寿司、甜虾寿司、三文鱼片寿司、带子寿司、鳗鱼寿司。5个白加州卷',
+          '22078': '6个三角形的牛油果三文鱼卷，一片三文鱼片卷成花形，加红鱼子。coho寿司、甜虾寿司、鳗鱼寿司。三个带鱼子的白加州，挤美乃滋，加天妇罗脆和红鱼子',
+          '22249': '寿司卷尽量摆成一条线',
+          '730486': '3个海鲜卷，3个牛油果三文鱼卷，6个加州卷。寿司卷平躺，倾斜45度角摆放。第1列海鲜卷和第3加州卷列挤辣美乃滋，海鲜卷放橙鱼子',
+          '528644': 'coho寿司、甜虾寿司。蟹肉辣美乃滋腐皮寿司、毛豆沙拉腐皮寿司。5个带鱼子的白加州卷，挤美乃滋，放天妇罗脆和红鱼子。',
+          '22283': '寿司卷平躺，倾斜45度角摆放，挤辣美乃滋，放葱花',
+          '690870': '寿司卷平躺，倾斜45度角摆放，挤辣美乃滋，放天妇罗脆'
+        }
+      },
+      'en': {
+        pageTitle: 'Service B - Sushi Menu List',
+        pageDescription: 'Three sauce packets refer to soy sauce, ginger, and wasabi, and must be arranged in that order',
+        statItemsLabel: 'Sushi Items',
+        statQuantityLabel: 'First Round Total',
+        searchPlaceholder: 'Search by product code, name, box, or Three sauce packets code...',
+        noResults: 'No matching sushi items found',
+        productCode: 'Product Code',
+        box: 'Box',
+        threeSaucePackets: 'Three sauce packets',
+        quantity: 'Quantity',
+        notes: 'Notes',
+        icons: {
+          box: '📦',
+          threeSaucePackets: '🍶',
+          quantity: '🔢',
+          notes: '📝'
+        },
+        sushiNames: {
+          '674110': 'Salmon Belly Sushi',
+          '22104': 'Unagi Sushi',
+          '522089': 'Garden Combo Sushi',
+          '22282': 'Avocado Roll',
+          '697030': 'Cucumber Avocado Roll',
+          '719731': 'Salmon Roll (Large)',
+          '719732': 'Cucumber Roll (Large)',
+          '22108': 'California Roll',
+          '664465': 'Spicy California Roll',
+          '696999': 'Avocado Salmon Roll',
+          '708707': 'Spicy Seafood Roll',
+          '22117': 'Tempura Shrimp Roll',
+          '660043': 'Spicy Tempura Shrimp Roll',
+          '765637': 'Crunchy Dragon Roll',
+          '22101': 'Cooked Salmon Roll',
+          '791932': 'Spicy Cooked Salmon Roll',
+          '774912': 'Charcoal Grilled Salmon Sushi',
+          '22080': 'Salmon Combo Sushi',
+          '22165': 'Sado Sushi',
+          '22078': 'Canada Sushi A',
+          '22249': 'Roll Combo Sushi',
+          '730486': 'Assorted Roll Combo',
+          '528644': 'Inari Sushi Combo',
+          '22283': 'Spicy Tuna Roll',
+          '690870': 'Spicy Salmon Roll'
+        },
+        sushiNotes: {
+          '22104': 'Brush with eel sauce, add sesame',
+          '22282': 'Sushi roll tilted 45 degrees, stand at 45 degrees',
+          '697030': 'Sushi roll flat, tilted 45 degrees',
+          '22108': 'Sushi roll tilted 45 degrees, stand at 45 degrees',
+          '664465': 'Sushi roll flat, tilted 45 degrees, squeeze spicy mayo',
+          '696999': 'Sushi roll tilted 45 degrees, stand at 45 degrees',
+          '708707': 'Sushi roll flat, tilted 45 degrees, squeeze spicy mayo, add orange roe',
+          '22117': 'Sushi roll flat, squeeze eel sauce, squeeze mayo, stagger two sauces',
+          '660043': 'Sushi roll flat, squeeze eel sauce, squeeze spicy mayo, stagger two sauces',
+          '765637': 'Squeeze eel sauce, squeeze mayo, stagger two sauces. Add extra tempura crunch, add red roe, sprinkle black sesame',
+          '22101': 'Sushi roll flat, tilted 45 degrees, squeeze eel sauce, squeeze mayo, stagger two sauces',
+          '791932': 'Sushi roll flat, tilted 45 degrees, squeeze eel sauce, squeeze spicy mayo, stagger two sauces',
+          '774912': '2 coho sushi, 2 salmon slice sushi. Dot eel sauce on top of 4 cooked salmon rolls',
+          '22080': '6 salmon slice sushi, 5 California rolls',
+          '22165': 'Coho sushi, sweet shrimp sushi, salmon slice sushi, scallop sushi, eel sushi. 5 white California rolls',
+          '22078': '6 triangle avocado salmon rolls, one salmon slice rolled into flower shape, add red roe. Coho sushi, sweet shrimp sushi, eel sushi. Three white California with roe, squeeze mayo, add tempura crunch and red roe',
+          '22249': 'Arrange sushi rolls in a line as much as possible',
+          '730486': '3 seafood rolls, 3 avocado salmon rolls, 6 California rolls. Sushi rolls flat, tilted 45 degrees. First row seafood rolls and third row California rolls squeeze spicy mayo, seafood rolls with orange roe',
+          '528644': 'Coho sushi, sweet shrimp sushi. Crab spicy mayo inari sushi, edamame salad inari sushi. 5 white California rolls with roe, squeeze mayo, add tempura crunch and red roe.',
+          '22283': 'Sushi roll flat, tilted 45 degrees, squeeze spicy mayo, add green onion',
+          '690870': 'Sushi roll flat, tilted 45 degrees, squeeze spicy mayo, add tempura crunch'
+        }
+      }
+    };
+
+    // Current language
+    let currentLang = localStorage.getItem('sushi-list-lang') || 'zh-TW';
+
+    // Translation function
+    function t(key, code = null) {
+      if (code && key === 'sushiNames' && translations[currentLang].sushiNames[code]) {
+        return translations[currentLang].sushiNames[code];
+      }else if (code && key === 'notes' && translations[currentLang].sushiNotes && translations[currentLang].sushiNotes[code]) {
+        return translations[currentLang].sushiNotes[code];
+      }else if (!code && translations[currentLang][key]) {
+        return translations[currentLang][key];
+      }else{
+        return "";
+      }
+    }
+
+    // Get icon by key
+    function getIcon(key) {
+      return translations[currentLang].icons[key] || '';
+    }
+
+    const sushiItems = [
+      {
+        id: 1,
+        productCode: "674110",
+        name: "三文魚腩壽司",
+        box: "ST2",
+        threeSaucePackets: "111",
+        quantity: 4,
+        image: "images/salmon_belly_sushi.jpg",
+        notes: ""
+      },
+      {
+        id: 2,
+        productCode: "22104",
+        name: "鰻魚壽司",
+        box: "ST2",
+        threeSaucePackets: "111",
+        quantity: 4,
+        image: "images/unagi_sushi.jpg",
+        notes: "掃鰻魚汁，加芝麻"
+      },
+      {
+        id: 3,
+        productCode: "522089",
+        name: "田園組合壽司",
+        box: "ST5",
+        threeSaucePackets: "211",
+        quantity: 2,
+        image: "images/garden_combo_sushi.jpg",
+        notes: ""
+      },
+      {
+        id: 4,
+        productCode: "22282",
+        name: "牛油果卷",
+        box: "ST2",
+        threeSaucePackets: "111",
+        quantity: 3,
+        image: "images/avocado_roll.jpg",
+        notes: "壽司卷傾斜45度角擺放，傾斜45度角立起來"
+      },
+      {
+        id: 5,
+        productCode: "697030",
+        name: "青瓜牛油卷",
+        box: "ST2",
+        threeSaucePackets: "111",
+        quantity: 2,
+        image: "images/cucumber_avocado_roll.jpg",
+        notes: "壽司卷平躺，傾斜45度角擺放"
+      },
+      {
+        id: 6,
+        productCode: "719731",
+        name: "三文卷（大）",
+        box: "ST2",
+        threeSaucePackets: "111",
+        quantity: 4,
+        image: "images/salmon_roll_large.jpg",
+        notes: ""
+      },
+      {
+        id: 7,
+        productCode: "719732",
+        name: "青瓜卷（大）",
+        box: "ST2",
+        threeSaucePackets: "111",
+        quantity: 4,
+        image: "images/cucumber_roll_large.jpg",
+        notes: ""
+      },
+      {
+        id: 8,
+        productCode: "22108",
+        name: "加州卷",
+        box: "ST2",
+        threeSaucePackets: "111",
+        quantity: 5,
+        image: "images/california_roll.jpg",
+        notes: "壽司卷傾斜45度角擺放，傾斜45度角立起來"
+      },
+      {
+        id: 9,
+        productCode: "664465",
+        name: "辣加州卷",
+        box: "ST2",
+        threeSaucePackets: "111",
+        quantity: 5,
+        image: "images/spicy_california_roll.jpg",
+        notes: "壽司卷平躺，傾斜45度角擺放，擠辣美乃滋"
+      },
+      {
+        id: 10,
+        productCode: "696999",
+        name: "牛油果三文魚卷",
+        box: "ST2",
+        threeSaucePackets: "111",
+        quantity: 5,
+        image: "images/avocado_salmon_roll.jpg",
+        notes: "壽司卷傾斜45度角擺放，傾斜45度角立起來"
+      },
+      {
+        id: 11,
+        productCode: "708707",
+        name: "香辣海鮮卷",
+        box: "ST2",
+        threeSaucePackets: "111",
+        quantity: 3,
+        image: "images/spicy_seafood_roll.jpg",
+        notes: "壽司卷平躺，傾斜45度角擺放，擠辣美乃滋，放橙魚子"
+      },
+      {
+        id: 12,
+        productCode: "22117",
+        name: "天婦羅蝦卷",
+        box: "ST5",
+        threeSaucePackets: "211",
+        quantity: 3,
+        image: "images/tempura_shrimp_roll.jpg",
+        notes: "壽司卷平躺，擠鰻魚汁，擠美乃滋，兩種醬汁錯開"
+      },
+      {
+        id: 13,
+        productCode: "660043",
+        name: "辣天婦羅蝦卷",
+        box: "ST5",
+        threeSaucePackets: "211",
+        quantity: 3,
+        image: "images/spicy_tempura_shrimp_roll.jpg",
+        notes: "壽司卷平躺，擠鰻魚汁，擠辣美乃滋，兩種醬汁錯開"
+      },
+      {
+        id: 14,
+        productCode: "765637",
+        name: "脆龍卷",
+        box: "ST5",
+        threeSaucePackets: "111",
+        quantity: 3,
+        image: "images/crunchy_dragon_roll.jpg",
+        notes: "擠鰻魚汁，擠美乃滋，兩種醬汁錯開。放較多的天婦羅脆，放紅魚子，撒黑芝麻"
+      },
+      {
+        id: 15,
+        productCode: "22101",
+        name: "熟三文卷",
+        box: "ST2",
+        threeSaucePackets: "111",
+        quantity: 2,
+        image: "images/cooked_salmon_roll.jpg",
+        notes: "壽司卷平躺，傾斜45度角擺放，擠鰻魚汁，擠美乃滋，兩種醬汁錯開"
+      },
+      {
+        id: 16,
+        productCode: "791932",
+        name: "辣熟三文卷",
+        box: "ST2",
+        threeSaucePackets: "111",
+        quantity: 2,
+        image: "images/spicy_cooked_salmon_roll.jpg",
+        notes: "壽司卷平躺，傾斜45度角擺放，擠鰻魚汁，擠辣美乃滋，兩種醬汁錯開"
+      },
+      {
+        id: 17,
+        productCode: "774912",
+        name: "炭燒三文魚壽司",
+        box: "ST4",
+        threeSaucePackets: "111",
+        quantity: 4,
+        image: "images/charcoal_grilled_salmon_sushi.jpg",
+        notes: "2個coho壽司，2個三文魚片壽司。4個熟三文卷的上面點鰻魚汁"
+      },
+      {
+        id: 18,
+        productCode: "22080",
+        name: "三文魚組合壽司",
+        box: "ST5",
+        threeSaucePackets: "211",
+        quantity: 4,
+        image: "images/salmon_combo_sushi.jpg",
+        notes: "6個三文魚片壽司，5個加州卷"
+      },
+      {
+        id: 19,
+        productCode: "22165",
+        name: "佐渡壽司",
+        box: "ST5",
+        threeSaucePackets: "211",
+        quantity: 4,
+        image: "images/sado_sushi.jpg",
+        notes: "coho壽司、甜蝦壽司、三文魚片壽司、帶子壽司、鰻魚壽司。5個白加州卷"
+      },
+      {
+        id: 20,
+        productCode: "22078",
+        name: "加拿大壽司A",
+        box: "ST5",
+        threeSaucePackets: "211",
+        quantity: 4,
+        image: "images/canada_sushi_a.jpg",
+        notes: "6個三角形的牛油果三文魚卷，一片三文魚片卷成花形，加紅魚子。coho壽司、甜蝦壽司、鰻魚壽司。三個帶魚子的白加州，擠美乃滋，加天婦羅脆和紅魚子"
+      },
+      {
+        id: 21,
+        productCode: "22249",
+        name: "卷物結合壽司",
+        box: "ST5",
+        threeSaucePackets: "211",
+        quantity: 4,
+        image: "images/roll_combo_sushi.jpg",
+        notes: "壽司卷儘量擺成一條線"
+      },
+      {
+        id: 22,
+        productCode: "730486",
+        name: "雜錦卷物組合",
+        box: "ST5",
+        threeSaucePackets: "211",
+        quantity: 5,
+        image: "images/assorted_roll_combo.jpg",
+        notes: "3個海鮮卷，3個牛油果三文魚卷，6個加州卷。壽司卷平躺，傾斜45度角擺放。第1列海鮮卷和第3加州卷列擠辣美乃滋，海鮮卷放橙魚子"
+      },
+      {
+        id: 23,
+        productCode: "528644",
+        name: "稻禾壽司組合",
+        box: "ST5",
+        threeSaucePackets: "211",
+        quantity: 3,
+        image: "images/inaho_sushi_combo.jpg",
+        notes: "coho壽司、甜蝦壽司。蟹肉辣美乃滋腐皮壽司、毛豆沙拉腐皮壽司。5個帶魚子的白加州卷，擠美乃滋，放天婦羅脆和紅魚子。"
+      },
+      {
+        id: 24,
+        productCode: "22283",
+        name: "辣吞拿魚卷",
+        box: "ST2",
+        threeSaucePackets: "111",
+        quantity: "1-4（視乎吞拿魚的量而定）",
+        image: "images/spicy_tuna_roll.jpg",
+        notes: "壽司卷平躺，傾斜45度角擺放，擠辣美乃滋，放蔥花"
+      },
+      {
+        id: 25,
+        productCode: "690870",
+        name: "辣三文卷",
+        box: "ST2",
+        threeSaucePackets: "111",
+        quantity: "5左右（視乎三文魚碎的量而定）",
+        image: "images/spicy_salmon_roll.jpg",
+        notes: "壽司卷平躺，傾斜45度角擺放，擠辣美乃滋，放天婦羅脆"
+      }
+    ];
+
+    let filteredItems = [...sushiItems];
+
+    function renderItems(items) {
+      const container = document.getElementById('itemsContainer');
+
+      if (items.length === 0) {
+        container.innerHTML = `<div class="no-results">${t('noResults')}</div>`;
+        return;
+      }
+
+      container.innerHTML = items.map(item => {
+        const translatedName = t('sushiNames', item.productCode);
+        const translatedNotes = t('notes', item.productCode) || '';
+        console.log(item.productCode,translatedName,translatedNotes,)
+        return `
+        <div class="item-card">
+          <div class="item-header">
+            <div class="item-name">${translatedName} (${item.productCode})</div>
+            <div class="item-specs">
+              <div class="item-spec">
+                <span class="item-spec-icon" title="${t('box')}">${getIcon('box')}</span>
+                <span>${item.box}</span>
+              </div>
+              <div class="item-spec">
+                <span class="item-spec-icon" title="${t('threeSaucePackets')}">${getIcon('threeSaucePackets')}</span>
+                <span>${item.threeSaucePackets}</span>
+              </div>
+              <div class="item-spec">
+                <span class="item-spec-icon" title="${t('quantity')}">${getIcon('quantity')}</span>
+                <span>${item.quantity}</span>
+              </div>
+            </div>
+          </div>
+          <div class="item-body">
+            <img src="${item.image}" alt="${translatedName}" class="item-image" loading="lazy" onerror="this.style.display='none'">
+            ${translatedNotes ? `<div class="item-notes"><span class="item-notes-icon" title="">${getIcon('notes')}</span><br><span class="item-notes-content">${translatedNotes}</span></div>` : `<div class="item-notes"><span class="item-notes-icon" title="">${getIcon('notes')}</span><br><span class="item-notes-content">${translatedName}</span></div>`}
+          </div>
+        </div>
+        `;
+      }).join('');
+    }
+
+    function updateStats() {
+      const totalQuantity = sushiItems.reduce((sum, item) => {
+        const qty = typeof item.quantity === 'number' ? item.quantity : 0;
+        return sum + qty;
+      }, 0);
+
+      document.getElementById('totalItems').textContent = sushiItems.length;
+      document.getElementById('totalQuantity').textContent = totalQuantity;
+    }
+
+    function handleSearch(event) {
+      const searchTerm = event.target.value.toLowerCase().trim();
+
+      if (!searchTerm) {
+        filteredItems = [...sushiItems];
+      } else {
+        filteredItems = sushiItems.filter(item => {
+          const translatedName = t('sushiNames', item.productCode).toLowerCase();
+          const translatedNotes = (t('notes', item.productCode) || '').toLowerCase();
+
+          return translatedName.includes(searchTerm) ||
+            item.productCode.includes(searchTerm) ||
+            item.box.toLowerCase().includes(searchTerm) ||
+            item.threeSaucePackets.includes(searchTerm) ||
+            translatedNotes.includes(searchTerm);
+        });
+      }
+
+      renderItems(filteredItems);
+    }
+
+    // Update UI text based on current language
+    function updateUIText() {
+      document.getElementById('pageTitle').textContent = t('pageTitle');
+      document.getElementById('pageDescription').textContent = t('pageDescription');
+      document.getElementById('statItemsLabel').textContent = t('statItemsLabel');
+      document.getElementById('statQuantityLabel').textContent = t('statQuantityLabel');
+      document.getElementById('searchInput').placeholder = t('searchPlaceholder');
+      document.documentElement.lang = currentLang;
+      document.title = t('pageTitle');
+    }
+
+    // Change language function
+    function changeLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem('sushi-list-lang', lang);
+
+      // Update active button
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+      });
+
+      // Update UI
+      updateUIText();
+      renderItems(filteredItems);
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      // Set initial language
+      updateUIText();
+      renderItems(sushiItems);
+      updateStats();
+
+      // Set active language button
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        if (btn.dataset.lang === currentLang) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+
+      // Add language switcher event listeners
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          changeLanguage(btn.dataset.lang);
+        });
+      });
+
+      // Add search event listener
+      const searchInput = document.getElementById('searchInput');
+      searchInput.addEventListener('input', handleSearch);
+    });
+  </script>
 </body>
 </html>
